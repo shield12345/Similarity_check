@@ -1,0 +1,50 @@
+I am interested in building an Android or Java ME application.
+[('I', 'PRP'), ('am', 'VBP'), ('interested', 'JJ'), ('in', 'IN'), ('building', 'VBG'), ('an', 'DT'), ('Android', 'NNP'), ('or', 'CC'), ('Java', 'NNP'), ('ME', 'NNP'), ('application', 'NN'), ('.', '.')]
+
+----
+
+Is there a Java wrapper?
+[('Is', 'VBZ'), ('there', 'EX'), ('a', 'DT'), ('Java', 'NNP'), ('wrapper', 'NN'), ('?', '.')]
+
+----
+
+I started working on one over the weekend.
+[('I', 'PRP'), ('started', 'VBD'), ('working', 'VBG'), ('on', 'IN'), ('one', 'CD'), ('over', 'IN'), ('the', 'DT'), ('weekend', 'NN'), ('.', '.')]
+
+----
+
+I went ahead and stuck it on github if you want to look.
+[('I', 'PRP'), ('went', 'VBD'), ('ahead', 'RB'), ('and', 'CC'), ('stuck', 'VB'), ('it', 'PRP'), ('on', 'IN'), ('github', 'NN'), ('if', 'IN'), ('you', 'PRP'), ('want', 'VBP'), ('to', 'TO'), ('look', 'VB'), ('.', '.')]
+
+----
+
+I'm shooting for a version that will have most functionality stometime this week.
+[('I', 'PRP'), ("'m", 'VBP'), ('shooting', 'VBG'), ('for', 'IN'), ('a', 'DT'), ('version', 'NN'), ('that', 'WDT'), ('will', 'MD'), ('have', 'VB'), ('most', 'RBS'), ('functionality', 'JJ'), ('stometime', 'NN'), ('this', 'DT'), ('week', 'NN'), ('.', '.')]
+
+----
+
+http://github.com/carsonmcdonald/Stack-Apps-Java-Library
+[('http', 'NN'), (':', ':'), ('//github.com/carsonmcdonald/Stack-Apps-Java-Library', 'JJ')]
+
+----
+
+I have released the beta snapshot version of my wrapper here.
+[('I', 'PRP'), ('have', 'VBP'), ('released', 'VBN'), ('the', 'DT'), ('beta', 'NN'), ('snapshot', 'JJ'), ('version', 'NN'), ('of', 'IN'), ('my', 'PRP$'), ('wrapper', 'NN'), ('here', 'RB'), ('.', '.')]
+
+----
+
+http://code.google.com/p/stackoverflow-java-sdk/.
+[('http', 'NN'), (':', ':'), ('//code.google.com/p/stackoverflow-java-sdk/', 'NN'), ('.', '.')]
+
+----
+
+The announcement is posted on this website as well but I guess it will take some time to show up.
+[('The', 'DT'), ('announcement', 'NN'), ('is', 'VBZ'), ('posted', 'VBN'), ('on', 'IN'), ('this', 'DT'), ('website', 'NN'), ('as', 'RB'), ('well', 'RB'), ('but', 'CC'), ('I', 'PRP'), ('guess', 'VBP'), ('it', 'PRP'), ('will', 'MD'), ('take', 'VB'), ('some', 'DT'), ('time', 'NN'), ('to', 'TO'), ('show', 'VB'), ('up', 'RP'), ('.', '.')]
+
+----
+
+:)
+[(':', ':'), (')', ')')]
+
+----
+

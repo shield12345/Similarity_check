@@ -1,0 +1,50 @@
+Is there an existing application or library in Java which will allow me to convert a  file?
+[('Is', 'VBZ'), ('there', 'EX'), ('an', 'DT'), ('existing', 'VBG'), ('application', 'NN'), ('or', 'CC'), ('library', 'NN'), ('in', 'IN'), ('Java', 'NNP'), ('which', 'WDT'), ('will', 'MD'), ('allow', 'VB'), ('me', 'PRP'), ('to', 'TO'), ('convert', 'VB'), ('a', 'DT'), ('file', 'NN'), ('?', '.')]
+
+----
+
+This may be too basic or limited of a solution, but couldn't you do a  on each line of the file, remembering the result array of the first line to generate the XML, and just spit each line's array data out with the proper XML elements padding each iteration of a loop?
+[('This', 'DT'), ('may', 'MD'), ('be', 'VB'), ('too', 'RB'), ('basic', 'JJ'), ('or', 'CC'), ('limited', 'VBN'), ('of', 'IN'), ('a', 'DT'), ('solution', 'NN'), (',', ','), ('but', 'CC'), ('could', 'MD'), ("n't", 'RB'), ('you', 'PRP'), ('do', 'VB'), ('a', 'DT'), ('on', 'IN'), ('each', 'DT'), ('line', 'NN'), ('of', 'IN'), ('the', 'DT'), ('file', 'NN'), (',', ','), ('remembering', 'VBG'), ('the', 'DT'), ('result', 'NN'), ('array', 'NN'), ('of', 'IN'), ('the', 'DT'), ('first', 'JJ'), ('line', 'NN'), ('to', 'TO'), ('generate', 'VB'), ('the', 'DT'), ('XML', 'NNP'), (',', ','), ('and', 'CC'), ('just', 'RB'), ('spit', 'VB'), ('each', 'DT'), ('line', 'NN'), ("'s", 'POS'), ('array', 'NN'), ('data', 'NNS'), ('out', 'RP'), ('with', 'IN'), ('the', 'DT'), ('proper', 'JJ'), ('XML', 'NNP'), ('elements', 'NNS'), ('padding', 'VBG'), ('each', 'DT'), ('iteration', 'NN'), ('of', 'IN'), ('a', 'DT'), ('loop', 'NN'), ('?', '.')]
+
+----
+
+Maybe this might help: JSefa
+[('Maybe', 'RB'), ('this', 'DT'), ('might', 'MD'), ('help', 'VB'), (':', ':'), ('JSefa', 'VB')]
+
+----
+
+You can read CSV file with this tool and serialize it to XML.
+[('You', 'PRP'), ('can', 'MD'), ('read', 'VB'), ('CSV', 'NNP'), ('file', 'NN'), ('with', 'IN'), ('this', 'DT'), ('tool', 'NN'), ('and', 'CC'), ('serialize', 'VB'), ('it', 'PRP'), ('to', 'TO'), ('XML', 'NNP'), ('.', '.')]
+
+----
+
+Converting a CSV file to XML doesn't add any value.
+[('Converting', 'VBG'), ('a', 'DT'), ('CSV', 'NNP'), ('file', 'NN'), ('to', 'TO'), ('XML', 'NNP'), ('does', 'VBZ'), ("n't", 'RB'), ('add', 'VB'), ('any', 'DT'), ('value', 'NN'), ('.', '.')]
+
+----
+
+Your program is already reading the CSV file, so arguing that you need XML doesn't work.
+[('Your', 'PRP$'), ('program', 'NN'), ('is', 'VBZ'), ('already', 'RB'), ('reading', 'VBG'), ('the', 'DT'), ('CSV', 'NNP'), ('file', 'NN'), (',', ','), ('so', 'RB'), ('arguing', 'VBG'), ('that', 'IN'), ('you', 'PRP'), ('need', 'VBP'), ('XML', 'RB'), ('does', 'VBZ'), ("n't", 'RB'), ('work', 'VB'), ('.', '.')]
+
+----
+
+On the other hand, reading the CSV file, doing something with the values, and then serializing to XML does make sense (well, as much as using XML can make sense... ;)) but you would supposedly already have a means of serializing to XML.
+[('On', 'IN'), ('the', 'DT'), ('other', 'JJ'), ('hand', 'NN'), (',', ','), ('reading', 'VBG'), ('the', 'DT'), ('CSV', 'NNP'), ('file', 'NN'), (',', ','), ('doing', 'VBG'), ('something', 'NN'), ('with', 'IN'), ('the', 'DT'), ('values', 'NNS'), (',', ','), ('and', 'CC'), ('then', 'RB'), ('serializing', 'VBG'), ('to', 'TO'), ('XML', 'VB'), ('does', 'VBZ'), ('make', 'VB'), ('sense', 'NN'), ('(', '('), ('well', 'RB'), (',', ','), ('as', 'RB'), ('much', 'JJ'), ('as', 'IN'), ('using', 'VBG'), ('XML', 'NN'), ('can', 'MD'), ('make', 'VB'), ('sense', 'NN'), ('...', ':'), (';', ':'), (')', ')'), (')', ')'), ('but', 'CC'), ('you', 'PRP'), ('would', 'MD'), ('supposedly', 'RB'), ('already', 'RB'), ('have', 'VB'), ('a', 'DT'), ('means', 'NNS'), ('of', 'IN'), ('serializing', 'VBG'), ('to', 'TO'), ('XML', 'NNP'), ('.', '.')]
+
+----
+
+As far as I know, there's no ready-made library to do this for you, but producing a tool capable of translating from CSV to XML should only require you to write a crude CSV parser and hook up JDOM (or your XML Java library of choice) with some glue code.
+[('As', 'RB'), ('far', 'RB'), ('as', 'IN'), ('I', 'PRP'), ('know', 'VBP'), (',', ','), ('there', 'EX'), ("'s", 'VBZ'), ('no', 'DT'), ('ready', 'JJ'), ('-', ':'), ('made', 'VBN'), ('library', 'NN'), ('to', 'TO'), ('do', 'VB'), ('this', 'DT'), ('for', 'IN'), ('you', 'PRP'), (',', ','), ('but', 'CC'), ('producing', 'VBG'), ('a', 'DT'), ('tool', 'NN'), ('capable', 'JJ'), ('of', 'IN'), ('translating', 'VBG'), ('from', 'IN'), ('CSV', 'NNP'), ('to', 'TO'), ('XML', 'VB'), ('should', 'MD'), ('only', 'RB'), ('require', 'VB'), ('you', 'PRP'), ('to', 'TO'), ('write', 'VB'), ('a', 'DT'), ('crude', 'NN'), ('CSV', 'NNP'), ('parser', 'NN'), ('and', 'CC'), ('hook', 'VB'), ('up', 'RP'), ('JDOM', 'NNP'), ('(', '('), ('or', 'CC'), ('your', 'PRP$'), ('XML', 'JJ'), ('Java', 'NNP'), ('library', 'NN'), ('of', 'IN'), ('choice', 'NN'), (')', ')'), ('with', 'IN'), ('some', 'DT'), ('glue', 'JJ'), ('code', 'NN'), ('.', '.')]
+
+----
+
+There is nothing I know of that can do this without you at least writing a little bit of code... You will need 2 separate library:
+[('There', 'EX'), ('is', 'VBZ'), ('nothing', 'NN'), ('I', 'PRP'), ('know', 'VBP'), ('of', 'IN'), ('that', 'DT'), ('can', 'MD'), ('do', 'VB'), ('this', 'DT'), ('without', 'IN'), ('you', 'PRP'), ('at', 'IN'), ('least', 'JJS'), ('writing', 'VBG'), ('a', 'DT'), ('little', 'JJ'), ('bit', 'NN'), ('of', 'IN'), ('code', 'NN'), ('...', ':'), ('You', 'PRP'), ('will', 'MD'), ('need', 'VB'), ('2', 'CD'), ('separate', 'JJ'), ('library', 'NN'), (':', ':')]
+
+----
+
+A CSV Parser Framework
+[('A', 'DT'), ('CSV', 'NNP'), ('Parser', 'NNP'), ('Framework', 'NNP')]
+
+----
+

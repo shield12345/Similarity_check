@@ -1,0 +1,1595 @@
+POST 1
+
+Is there an existing application or library in Java which will allow me to convert a <code>CSV</code> data file to <code>XML</code> file?  
+
+The <code>XML</code> tags would be provided through possibly the first row containing column headings.
+
+------------------------------------------------------------------------
+
+["Is", "there", "an", "existing", "application", "or", "library", "in", "Java", "which", "will", "allow", "me", "to", "convert", "a", "<code>CSV</code>", "data", "file", "to", "<code>XML</code>", "file", "?", "The", "<code>XML</code>", "tags", "would", "be", "provided", "through", "possibly", "the", "first", "row", "containing", "column", "headings", "."]
+
+========================================================================
+
+
+
+POST 2
+
+This may be too basic or limited of a solution, but couldn't you do a <code>String.split()</code> on each line of the file, remembering the result array of the first line to generate the XML, and just spit each line's array data out with the proper XML elements padding each iteration of a loop?
+
+------------------------------------------------------------------------
+
+["This", "may", "be", "too", "basic", "or", "limited", "of", "a", "solution", ",", "but", "could", "n't", "you", "do", "a", "<code>String.split()</code>", "on", "each", "line", "of", "the", "file", ",", "remembering", "the", "result", "array", "of", "the", "first", "line", "to", "generate", "the", "XML", ",", "and", "just", "spit", "each", "line", "'s", "array", "data", "out", "with", "the", "proper", "XML", "elements", "padding", "each", "iteration", "of", "a", "loop", "?"]
+
+========================================================================
+
+
+
+POST 3
+
+Maybe this might help: JSefa
+
+You can read CSV file with this tool and serialize it to XML.
+
+------------------------------------------------------------------------
+
+["Maybe", "this", "might", "help", ":", "JSefa", "You", "can", "read", "CSV", "file", "with", "this", "tool", "and", "serialize", "it", "to", "XML", "."]
+
+========================================================================
+
+
+
+POST 4
+
+I don't understand why you would want to do this. It sounds almost like cargo cult coding.
+
+Converting a CSV file to XML doesn't add any value. Your program is already reading the CSV file, so arguing that you need XML doesn't work.
+
+On the other hand, reading the CSV file, doing something with the values, and then serializing to XML does make sense (well, as much as using XML can make sense... ;)) but you would supposedly already have a means of serializing to XML.
+
+------------------------------------------------------------------------
+
+["I", "do", "n't", "understand", "why", "you", "would", "want", "to", "do", "this", ".", "It", "sounds", "almost", "like", "cargo", "cult", "coding", ".", "Converting", "a", "CSV", "file", "to", "XML", "does", "n't", "add", "any", "value", ".", "Your", "program", "is", "already", "reading", "the", "CSV", "file", ",", "so", "arguing", "that", "you", "need", "XML", "does", "n't", "work", ".", "On", "the", "other", "hand", ",", "reading", "the", "CSV", "file", ",", "doing", "something", "with", "the", "values", ",", "and", "then", "serializing", "to", "XML", "does", "make", "sense", "(", "well", ",", "as", "much", "as", "using", "XML", "can", "make", "sense", "...", ";)", ")", "but", "you", "would", "supposedly", "already", "have", "a", "means", "of", "serializing", "to", "XML", "."]
+
+========================================================================
+
+
+
+POST 5
+
+As far as I know, there's no ready-made library to do this for you, but producing a tool capable of translating from CSV to XML should only require you to write a crude CSV parser and hook up JDOM (or your XML Java library of choice) with some glue code.
+
+------------------------------------------------------------------------
+
+["As", "far", "as", "I", "know", ",", "there", "'s", "no", "ready", "-", "made", "library", "to", "do", "this", "for", "you", ",", "but", "producing", "a", "tool", "capable", "of", "translating", "from", "CSV", "to", "XML", "should", "only", "require", "you", "to", "write", "a", "crude", "CSV", "parser", "and", "hook", "up", "JDOM", "(", "or", "your", "XML", "Java", "library", "of", "choice", ")", "with", "some", "glue", "code", "."]
+
+========================================================================
+
+
+
+POST 6
+
+There is nothing I know of that can do this without you at least writing a little bit of code... You will need 2 separate library:
+
+A CSV Parser Framework 
+An XML Serialization Framework
+
+The CSV parser I would recommend (unless you want to have a little bit of fun to write your own CSV Parser) is OpenCSV (A SourceForge Project for parsing CSV Data)
+
+The XML Serialization Framework should be something that can scale in case you want to transform large (or huge) CSV file to XML: My recommendation is the Sun Java Streaming XML Parser Framework (See here) which allows pull-parsing AND serialization.
+
+------------------------------------------------------------------------
+
+["There", "is", "nothing", "I", "know", "of", "that", "can", "do", "this", "without", "you", "at", "least", "writing", "a", "little", "bit", "of", "code", "...", "You", "will", "need", "2", "separate", "library", ":", "A", "CSV", "Parser", "Framework", "An", "XML", "Serialization", "Framework", "The", "CSV", "parser", "I", "would", "recommend", "(", "unless", "you", "want", "to", "have", "a", "little", "bit", "of", "fun", "to", "write", "your", "own", "CSV", "Parser", ")", "is", "OpenCSV", "(", "A", "SourceForge", "Project", "for", "parsing", "CSV", "Data", ")", "The", "XML", "Serialization", "Framework", "should", "be", "something", "that", "can", "scale", "in", "case", "you", "want", "to", "transform", "large", "(", "or", "huge", ")", "CSV", "file", "to", "XML", ":", "My", "recommendation", "is", "the", "Sun", "Java", "Streaming", "XML", "Parser", "Framework", "(", "See", "here", ")", "which", "allows", "pull", "-", "parsing", "AND", "serialization", "."]
+
+========================================================================
+
+
+
+POST 7
+
+I know you asked for Java, but this strikes me as a task well suited to a scripting language. Here is a quick (very simple) solution written in Groovy.
+
+test.csv
+
+However, the code does very simple parsing (not taking into account quoted or escaped commas) and it does not account for possible absent data.
+
+------------------------------------------------------------------------
+
+["I", "know", "you", "asked", "for", "Java", ",", "but", "this", "strikes", "me", "as", "a", "task", "well", "suited", "to", "a", "scripting", "language", ".", "Here", "is", "a", "quick", "(", "very", "simple", ")", "solution", "written", "in", "Groovy", ".", "test.csv", "However", ",", "the", "code", "does", "very", "simple", "parsing", "(", "not", "taking", "into", "account", "quoted", "or", "escaped", "commas", ")", "and", "it", "does", "not", "account", "for", "possible", "absent", "data", "."]
+
+========================================================================
+
+
+
+POST 8
+
+This solution does not need any CSV or XML libraries and, I know, it does not handle any illegal characters and encoding issues, but you might be interested in it as well, provided your CSV input does not break the above mentioned rules.
+
+Attention: You should not use this code unless you know what you do or don't have the chance to use a further library (possible in some bureaucratic projects)... Use a StringBuffer for older Runtime Environments...
+
+So here we go:
+
+------------------------------------------------------------------------
+
+["This", "solution", "does", "not", "need", "any", "CSV", "or", "XML", "libraries", "and", ",", "I", "know", ",", "it", "does", "not", "handle", "any", "illegal", "characters", "and", "encoding", "issues", ",", "but", "you", "might", "be", "interested", "in", "it", "as", "well", ",", "provided", "your", "CSV", "input", "does", "not", "break", "the", "above", "mentioned", "rules", ".", "Attention", ":", "You", "should", "not", "use", "this", "code", "unless", "you", "know", "what", "you", "do", "or", "do", "n't", "have", "the", "chance", "to", "use", "a", "further", "library", "(", "possible", "in", "some", "bureaucratic", "projects", ")", "...", "Use", "a", "StringBuffer", "for", "older", "Runtime", "Environments", "...", "So", "here", "we", "go", ":"]
+
+========================================================================
+
+
+
+POST 9
+
+As the others above, I don't know any one-step way to do that, but if you are ready to use very simple external libraries, I would suggest:
+
+OpenCsv for parsing CSV (small, simple, reliable and easy to use)
+
+Xstream to parse/serialize XML (very very easy to use, and creating fully human readable xml)
+
+Using the same sample data as above, code would look like:
+
+------------------------------------------------------------------------
+
+["As", "the", "others", "above", ",", "I", "do", "n't", "know", "any", "one", "-", "step", "way", "to", "do", "that", ",", "but", "if", "you", "are", "ready", "to", "use", "very", "simple", "external", "libraries", ",", "I", "would", "suggest", ":", "OpenCsv", "for", "parsing", "CSV", "(", "small", ",", "simple", ",", "reliable", "and", "easy", "to", "use", ")", "Xstream", "to", "parse", "/", "serialize", "XML", "(", "very", "very", "easy", "to", "use", ",", "and", "creating", "fully", "human", "readable", "xml", ")", "Using", "the", "same", "sample", "data", "as", "above", ",", "code", "would", "look", "like", ":"]
+
+========================================================================
+
+
+
+POST 10
+
+What is the "purist" or "correct" way to access an object's properties from within an object method that is not a getter/setter method?
+
+I know that from outside of the object you should use a getter/setter, but from within would you just do:
+
+Java:
+
+Forgive me if my Java is a little off, it's been a year since I programmed in Java...
+
+EDIT:
+
+It seems people are assuming I am talking about private or protected variables/properties only. When I learned OO I was taught to use getters/setters for every single property even if it was public (and actually I was told never to make any variable/property public). So, I may be starting off from a false assumption from the get go. It appears that people answering this question are maybe saying that you should have public properties and that those don't need getters and setters, which goes against what I was taught, and what I was talking about, although maybe that needs to be discussed as well. That's probably a good topic for a different question though...
+
+------------------------------------------------------------------------
+
+["What", "is", "the", """, "purist", """, "or", """, "correct", """, "way", "to", "access", "an", "object", "'s", "properties", "from", "within", "an", "object", "method", "that", "is", "not", "a", "getter", "/", "setter", "method", "?", "I", "know", "that", "from", "outside", "of", "the", "object", "you", "should", "use", "a", "getter", "/", "setter", ",", "but", "from", "within", "would", "you", "just", "do", ":", "Java", ":", "Forgive", "me", "if", "my", "Java", "is", "a", "little", "off", ",", "it", "'s", "been", "a", "year", "since", "I", "programmed", "in", "Java", "...", "EDIT", ":", "It", "seems", "people", "are", "assuming", "I", "am", "talking", "about", "private", "or", "protected", "variables", "/", "properties", "only", ".", "When", "I", "learned", "OO", "I", "was", "taught", "to", "use", "getters", "/", "setters", "for", "every", "single", "property", "even", "if", "it", "was", "public", "(", "and", "actually", "I", "was", "told", "never", "to", "make", "any", "variable", "/", "property", "public", ")", ".", "So", ",", "I", "may", "be", "starting", "off", "from", "a", "false", "assumption", "from", "the", "get", "go", ".", "It", "appears", "that", "people", "answering", "this", "question", "are", "maybe", "saying", "that", "you", "should", "have", "public", "properties", "and", "that", "those", "do", "n't", "need", "getters", "and", "setters", ",", "which", "goes", "against", "what", "I", "was", "taught", ",", "and", "what", "I", "was", "talking", "about", ",", "although", "maybe", "that", "needs", "to", "be", "discussed", "as", "well", ".", "That", "'s", "probably", "a", "good", "topic", "for", "a", "different", "question", "though", "..."]
+
+========================================================================
+
+
+
+POST 11
+
+This has religious war potential, but it seems to me that if you're using a getter/setter, you should use it internally as well - using both will lead to maintenance problems down the road (e.g. somebody adds code to a setter that needs to run every time that property is set, and the property is being set internally w/o that setter being called).
+
+------------------------------------------------------------------------
+
+["This", "has", "religious", "war", "potential", ",", "but", "it", "seems", "to", "me", "that", "if", "you", "'re", "using", "a", "getter", "/", "setter", ",", "you", "should", "use", "it", "internally", "as", "well", "-", "using", "both", "will", "lead", "to", "maintenance", "problems", "down", "the", "road", "(", "e.g.", "somebody", "adds", "code", "to", "a", "setter", "that", "needs", "to", "run", "every", "time", "that", "property", "is", "set", ",", "and", "the", "property", "is", "being", "set", "internally", "w", "/", "o", "that", "setter", "being", "called", ")", "."]
+
+========================================================================
+
+
+
+POST 12
+
+It depends on how the property is used. For example, say you have a student object that has a name property. You could use your Get method to pull the name from the database, if it hasn't been retrieved already. This way you are reducing unnecessary calls to the database.
+
+Now let's say you have a private integer counter in your object that counts the number of times the name has been called. You may want to not use the Get method from inside the object because it would produce an invalid count.
+
+------------------------------------------------------------------------
+
+["It", "depends", "on", "how", "the", "property", "is", "used", ".", "For", "example", ",", "say", "you", "have", "a", "student", "object", "that", "has", "a", "name", "property", ".", "You", "could", "use", "your", "Get", "method", "to", "pull", "the", "name", "from", "the", "database", ",", "if", "it", "has", "n't", "been", "retrieved", "already", ".", "This", "way", "you", "are", "reducing", "unnecessary", "calls", "to", "the", "database", ".", "Now", "let", "'s", "say", "you", "have", "a", "private", "integer", "counter", "in", "your", "object", "that", "counts", "the", "number", "of", "times", "the", "name", "has", "been", "called", ".", "You", "may", "want", "to", "not", "use", "the", "Get", "method", "from", "inside", "the", "object", "because", "it", "would", "produce", "an", "invalid", "count", "."]
+
+========================================================================
+
+
+
+POST 13
+
+Am I just going overboard here?
+
+Perhaps ;)
+
+Another approach would be to utilize a private/protected method to actually do the getting (caching/db/etc), and a public wrapper for it that increments the count:
+
+PHP:
+
+This way you can still use that first argument for something else (like sending a flag for whether or not to used cached data here perhaps).
+
+------------------------------------------------------------------------
+
+["Am", "I", "just", "going", "overboard", "here", "?", "Perhaps", ";)", "Another", "approach", "would", "be", "to", "utilize", "a", "private", "/", "protected", "method", "to", "actually", "do", "the", "getting", "(", "caching", "/", "db", "/", "etc", ")", ",", "and", "a", "public", "wrapper", "for", "it", "that", "increments", "the", "count", ":", "PHP", ":", "This", "way", "you", "can", "still", "use", "that", "first", "argument", "for", "something", "else", "(", "like", "sending", "a", "flag", "for", "whether", "or", "not", "to", "used", "cached", "data", "here", "perhaps", ")", "."]
+
+========================================================================
+
+
+
+POST 14
+
+Well, it seems with C# 3.0 properties' default implementation, the decision is taken for you; you HAVE to set the property using the (possibly private) property setter.
+
+I personally only use the private member-behind when not doing so would cause the object to fall in an less than desirable state, such as when initializing or when caching/lazy loading is involved.
+
+------------------------------------------------------------------------
+
+["Well", ",", "it", "seems", "with", "C#", "3.0", "properties", "'", "default", "implementation", ",", "the", "decision", "is", "taken", "for", "you", ";", "you", "HAVE", "to", "set", "the", "property", "using", "the", "(", "possibly", "private", ")", "property", "setter", ".", "I", "personally", "only", "use", "the", "private", "member", "-", "behind", "when", "not", "doing", "so", "would", "cause", "the", "object", "to", "fall", "in", "an", "less", "than", "desirable", "state", ",", "such", "as", "when", "initializing", "or", "when", "caching", "/", "lazy", "loading", "is", "involved", "."]
+
+========================================================================
+
+
+
+POST 15
+
+As stated in some of the comments: Sometimes you should, sometimes you shouldn't. The great part about private variables is that you are able to see all the places they are used when you change something. If your getter/setter does something you need, use it. If it doesn't matter you decide.
+
+The opposite case could be made that if you use the getter/setter and somebody changes the getter/setter they have to analyze all the places the getter and setter is used internally to see if it messes something up.
+
+------------------------------------------------------------------------
+
+["As", "stated", "in", "some", "of", "the", "comments", ":", "Sometimes", "you", "should", ",", "sometimes", "you", "should", "n't", ".", "The", "great", "part", "about", "private", "variables", "is", "that", "you", "are", "able", "to", "see", "all", "the", "places", "they", "are", "used", "when", "you", "change", "something", ".", "If", "your", "getter", "/", "setter", "does", "something", "you", "need", ",", "use", "it", ".", "If", "it", "does", "n't", "matter", "you", "decide", ".", "The", "opposite", "case", "could", "be", "made", "that", "if", "you", "use", "the", "getter", "/", "setter", "and", "somebody", "changes", "the", "getter", "/", "setter", "they", "have", "to", "analyze", "all", "the", "places", "the", "getter", "and", "setter", "is", "used", "internally", "to", "see", "if", "it", "messes", "something", "up", "."]
+
+========================================================================
+
+
+
+POST 16
+
+Personally, I feel like it's important to remain consistent.  If you have getters and setters, use them.  The only time I would access a field directly is when the accessor has a lot of overhead.  It may feel like you're bloating your code unnecessarily, but it can certainly save a whole lot of headache in the future.  The classic example:
+
+Later on, you may desire to change the way that field works.  Maybe it should be calculated on-the-fly or maybe you would like to use a different type for the backing store.  If you are accessing properties directly, a change like that can break an awful lot of code in one swell foop.
+
+------------------------------------------------------------------------
+
+["Personally", ",", "I", "feel", "like", "it", "'s", "important", "to", "remain", "consistent", ".", "If", "you", "have", "getters", "and", "setters", ",", "use", "them", ".", "The", "only", "time", "I", "would", "access", "a", "field", "directly", "is", "when", "the", "accessor", "has", "a", "lot", "of", "overhead", ".", "It", "may", "feel", "like", "you", "'re", "bloating", "your", "code", "unnecessarily", ",", "but", "it", "can", "certainly", "save", "a", "whole", "lot", "of", "headache", "in", "the", "future", ".", "The", "classic", "example", ":", "Later", "on", ",", "you", "may", "desire", "to", "change", "the", "way", "that", "field", "works", ".", "Maybe", "it", "should", "be", "calculated", "on", "-", "the", "-", "fly", "or", "maybe", "you", "would", "like", "to", "use", "a", "different", "type", "for", "the", "backing", "store", ".", "If", "you", "are", "accessing", "properties", "directly", ",", "a", "change", "like", "that", "can", "break", "an", "awful", "lot", "of", "code", "in", "one", "swell", "foop", "."]
+
+========================================================================
+
+
+
+POST 17
+
+i can be wrong because i'm autodidact, but i NEVER user public properties in my Java clases, they are allways private or protected, so that outside code must access by getters/setters. it's better for mainteance / modification purposes. And for inside class code... if getter method is trivial i use the property directly, but i allways use the setter methods because i could easily add code to fire events if i wish
+
+------------------------------------------------------------------------
+
+["i", "can", "be", "wrong", "because", "i", "'m", "autodidact", ",", "but", "i", "NEVER", "user", "public", "properties", "in", "my", "Java", "clases", ",", "they", "are", "allways", "private", "or", "protected", ",", "so", "that", "outside", "code", "must", "access", "by", "getters", "/", "setters", ".", "it", "'s", "better", "for", "mainteance", "/", "modification", "purposes", ".", "And", "for", "inside", "class", "code", "...", "if", "getter", "method", "is", "trivial", "i", "use", "the", "property", "directly", ",", "but", "i", "allways", "use", "the", "setter", "methods", "because", "i", "could", "easily", "add", "code", "to", "fire", "events", "if", "i", "wish"]
+
+========================================================================
+
+
+
+POST 18
+
+i've found using setters/getters made my code easier to read. I also like the control it gives when other classes use the methods and if i change the data the property will store.
+
+------------------------------------------------------------------------
+
+["i", "'ve", "found", "using", "setters", "/", "getters", "made", "my", "code", "easier", "to", "read", ".", "I", "also", "like", "the", "control", "it", "gives", "when", "other", "classes", "use", "the", "methods", "and", "if", "i", "change", "the", "data", "the", "property", "will", "store", "."]
+
+========================================================================
+
+
+
+POST 19
+
+Private fields with public or protected properties.  Access to the values should go through the properties, and be copied to a local variable if they will be used more than once in a method.  If and ONLY if you have the rest of your application so totally tweaked, rocked out, and otherwise optimized to where accessing values by going through their assosciated properties has become a bottleneck (And that will never EVER happen, I guarantee) should you even begin to consider letting anything other than the properties touch their backing variables directly.
+
+.NET developers can use automatic properties to enforce this since you can't even see the backing variables at design time.
+
+------------------------------------------------------------------------
+
+["Private", "fields", "with", "public", "or", "protected", "properties", ".", "Access", "to", "the", "values", "should", "go", "through", "the", "properties", ",", "and", "be", "copied", "to", "a", "local", "variable", "if", "they", "will", "be", "used", "more", "than", "once", "in", "a", "method", ".", "If", "and", "ONLY", "if", "you", "have", "the", "rest", "of", "your", "application", "so", "totally", "tweaked", ",", "rocked", "out", ",", "and", "otherwise", "optimized", "to", "where", "accessing", "values", "by", "going", "through", "their", "assosciated", "properties", "has", "become", "a", "bottleneck", "(", "And", "that", "will", "never", "EVER", "happen", ",", "I", "guarantee", ")", "should", "you", "even", "begin", "to", "consider", "letting", "anything", "other", "than", "the", "properties", "touch", "their", "backing", "variables", "directly", ".", ".NET", "developers", "can", "use", "automatic", "properties", "to", "enforce", "this", "since", "you", "ca", "n't", "even", "see", "the", "backing", "variables", "at", "design", "time", "."]
+
+========================================================================
+
+
+
+POST 20
+
+If by "purist" you mean "most encapsulation", then I typically declare all my fields as private and then use this.field from within the class itself, but all other classes, including subclasses, access instance state using the getters.
+
+------------------------------------------------------------------------
+
+["If", "by", """, "purist", """, "you", "mean", """, "most", "encapsulation", """, ",", "then", "I", "typically", "declare", "all", "my", "fields", "as", "private", "and", "then", "use", "this.field", "from", "within", "the", "class", "itself", ",", "but", "all", "other", "classes", ",", "including", "subclasses", ",", "access", "instance", "state", "using", "the", "getters", "."]
+
+========================================================================
+
+
+
+POST 21
+
+If I won't edit the property I'll use a <code>get_property()</code> public method unless it's a special occasion such as a MySQLi object inside another object in which case I'll just public the property and refer to it as <code>$obj->object_property</code>.
+
+Inside the object it's always $this->property for me.
+
+------------------------------------------------------------------------
+
+["If", "I", "wo", "n't", "edit", "the", "property", "I", "'ll", "use", "a", "<code>get_property()</code>", "public", "method", "unless", "it", "'s", "a", "special", "occasion", "such", "as", "a", "MySQLi", "object", "inside", "another", "object", "in", "which", "case", "I", "'ll", "just", "public", "the", "property", "and", "refer", "to", "it", "as", "<code>$obj->object_property</code>", ".", "Inside", "the", "object", "it", "'s", "always", "$", "this", "->", "property", "for", "me", "."]
+
+========================================================================
+
+
+
+POST 22
+
+I like the answer by cmcculloh, but it seems like the most correct is the answer by Greg Hurlman. Use getter/setters all the time if you started using them from the getgo and/or are used to working with them.
+
+As an aside, I personally find that using getter/setters makes the code easier to read and to debug later on.
+
+------------------------------------------------------------------------
+
+["I", "like", "the", "answer", "by", "cmcculloh", ",", "but", "it", "seems", "like", "the", "most", "correct", "is", "the", "answer", "by", "Greg", "Hurlman", ".", "Use", "getter", "/", "setters", "all", "the", "time", "if", "you", "started", "using", "them", "from", "the", "getgo", "and", "/", "or", "are", "used", "to", "working", "with", "them", ".", "As", "an", "aside", ",", "I", "personally", "find", "that", "using", "getter", "/", "setters", "makes", "the", "code", "easier", "to", "read", "and", "to", "debug", "later", "on", "."]
+
+========================================================================
+
+
+
+POST 23
+
+What is the meaning of the Java warning?
+
+  Type safety: The cast from Object to List is actually checking against the erased type List
+
+I get this warning when I try to cast an Object to a type with generic information, such as in the following code:
+
+------------------------------------------------------------------------
+
+["What", "is", "the", "meaning", "of", "the", "Java", "warning", "?", "Type", "safety", ":", "The", "cast", "from", "Object", "to", "List", "is", "actually", "checking", "against", "the", "erased", "type", "List", "I", "get", "this", "warning", "when", "I", "try", "to", "cast", "an", "Object", "to", "a", "type", "with", "generic", "information", ",", "such", "as", "in", "the", "following", "code", ":"]
+
+========================================================================
+
+
+
+POST 24
+
+This warning is there because Java is not actually storing type information at run-time in an object that uses generics.  Thus, if <code>object</code> is actually a <code>List<String></code>, there will be no <code>ClassCastException</code> at run-time except until an item is accessed from the list that doesn't match the generic type defined in the variable.  
+
+This can cause further complications if items are added to the list, with this incorrect generic type information.  Any code still holding a reference to the list but with the correct generic type information will now have an inconsistent list.  
+
+To remove the warning, try:
+
+However, note that you will not be able to use certain methods such as add because the compiler doesn't know if you are trying to add an object of incorrect type.  The above will work in a lot of situations, but if you have to use add, or some similarly restricted method, you will just have to suffer the yellow underline in Eclipse (or a <code>SuppressWarning</code> annotation).
+
+------------------------------------------------------------------------
+
+["This", "warning", "is", "there", "because", "Java", "is", "not", "actually", "storing", "type", "information", "at", "run", "-", "time", "in", "an", "object", "that", "uses", "generics", ".", "Thus", ",", "if", "<code>object</code>", "is", "actually", "a", "<code>List<String></code>", ",", "there", "will", "be", "no", "<code>ClassCastException</code>", "at", "run", "-", "time", "except", "until", "an", "item", "is", "accessed", "from", "the", "list", "that", "does", "n't", "match", "the", "generic", "type", "defined", "in", "the", "variable", ".", "This", "can", "cause", "further", "complications", "if", "items", "are", "added", "to", "the", "list", ",", "with", "this", "incorrect", "generic", "type", "information", ".", "Any", "code", "still", "holding", "a", "reference", "to", "the", "list", "but", "with", "the", "correct", "generic", "type", "information", "will", "now", "have", "an", "inconsistent", "list", ".", "To", "remove", "the", "warning", ",", "try", ":", "However", ",", "note", "that", "you", "will", "not", "be", "able", "to", "use", "certain", "methods", "such", "as", "add", "because", "the", "compiler", "does", "n't", "know", "if", "you", "are", "trying", "to", "add", "an", "object", "of", "incorrect", "type", ".", "The", "above", "will", "work", "in", "a", "lot", "of", "situations", ",", "but", "if", "you", "have", "to", "use", "add", ",", "or", "some", "similarly", "restricted", "method", ",", "you", "will", "just", "have", "to", "suffer", "the", "yellow", "underline", "in", "Eclipse", "(", "or", "a", "<code>SuppressWarning</code>", "annotation", ")", "."]
+
+========================================================================
+
+
+
+POST 25
+
+I was reading More Joel on Software when I came across Joel Spolsky saying something about a particular type of programmer knowing the difference between an <code>int</code> and an <code>Integer</code> in Java/C# (Object Oriented Programming Languages).
+
+So, what is the difference?
+
+------------------------------------------------------------------------
+
+["I", "was", "reading", "More", "Joel", "on", "Software", "when", "I", "came", "across", "Joel", "Spolsky", "saying", "something", "about", "a", "particular", "type", "of", "programmer", "knowing", "the", "difference", "between", "an", "<code>int</code>", "and", "an", "<code>Integer</code>", "in", "Java", "/", "C#", "(", "Object", "Oriented", "Programming", "Languages", ")", ".", "So", ",", "what", "is", "the", "difference", "?"]
+
+========================================================================
+
+
+
+POST 26
+
+In Java, the 'int' type is a primitive , whereas the 'Integer' type is an object.
+
+In C#, the 'int' type is the same as <code>System.Int32</code> and is a value type (ie more like the java 'int'). An integer (just like any other value types) can be boxed ("wrapped") into an object. 
+
+The differences between objects and primitives are somewhat beyond the scope of this question, but to summarize: 
+
+Objects provide facilities for polymorphism, are passed by reference (or more accurately have references passed by value), and are allocated from the heap. Conversely, primitives are immutable types that are passed by value and are often allocated from the stack.
+
+------------------------------------------------------------------------
+
+["In", "Java", ",", "the", "'", "int", "'", "type", "is", "a", "primitive", ",", "whereas", "the", "'", "Integer", "'", "type", "is", "an", "object", ".", "In", "C#", ",", "the", "'", "int", "'", "type", "is", "the", "same", "as", "<code>System.Int32</code>", "and", "is", "a", "value", "type", "(", "ie", "more", "like", "the", "java", "'", "int", "'", ")", ".", "An", "integer", "(", "just", "like", "any", "other", "value", "types", ")", "can", "be", "boxed", "(", """, "wrapped", """, ")", "into", "an", "object", ".", "The", "differences", "between", "objects", "and", "primitives", "are", "somewhat", "beyond", "the", "scope", "of", "this", "question", ",", "but", "to", "summarize", ":", "Objects", "provide", "facilities", "for", "polymorphism", ",", "are", "passed", "by", "reference", "(", "or", "more", "accurately", "have", "references", "passed", "by", "value", ")", ",", "and", "are", "allocated", "from", "the", "heap", ".", "Conversely", ",", "primitives", "are", "immutable", "types", "that", "are", "passed", "by", "value", "and", "are", "often", "allocated", "from", "the", "stack", "."]
+
+========================================================================
+
+
+
+POST 27
+
+Well, in Java an int is a primitive while an Integer is an Object. Meaning, if you made a new Integer:
+
+would produce an error, because int is not an object.
+
+int is one of the few primitives in Java (along with char and some others). I'm not 100% sure, but I'm thinking that the Integer object more or less just has an int property and a whole bunch of methods to interact with that property (like the toString() method for example). So Integer is a fancy way to work with an int (Just as perhaps String is a fancy way to work with a group of chars).
+
+I know that Java isn't C, but since I've never programmed in C this is the closest I could come to the answer. Hope this helps!
+
+Integer object javadoc
+
+Integer Ojbect vs. int primitive comparison
+
+------------------------------------------------------------------------
+
+["Well", ",", "in", "Java", "an", "int", "is", "a", "primitive", "while", "an", "Integer", "is", "an", "Object", ".", "Meaning", ",", "if", "you", "made", "a", "new", "Integer", ":", "would", "produce", "an", "error", ",", "because", "int", "is", "not", "an", "object", ".", "int", "is", "one", "of", "the", "few", "primitives", "in", "Java", "(", "along", "with", "char", "and", "some", "others", ")", ".", "I", "'m", "not", "100", "%", "sure", ",", "but", "I", "'m", "thinking", "that", "the", "Integer", "object", "more", "or", "less", "just", "has", "an", "int", "property", "and", "a", "whole", "bunch", "of", "methods", "to", "interact", "with", "that", "property", "(", "like", "the", "toString", "(", ")", "method", "for", "example", ")", ".", "So", "Integer", "is", "a", "fancy", "way", "to", "work", "with", "an", "int", "(", "Just", "as", "perhaps", "String", "is", "a", "fancy", "way", "to", "work", "with", "a", "group", "of", "chars", ")", ".", "I", "know", "that", "Java", "is", "n't", "C", ",", "but", "since", "I", "'ve", "never", "programmed", "in", "C", "this", "is", "the", "closest", "I", "could", "come", "to", "the", "answer", ".", "Hope", "this", "helps", "!", "Integer", "object", "javadoc", "Integer", "Ojbect", "vs", ".", "int", "primitive", "comparison"]
+
+========================================================================
+
+
+
+POST 28
+
+In C#, int is just an alias for <code>System.Int32</code>, string for <code>System.String</code>, double for <code>System.Double</code> etc...
+
+Personally I prefer int, string, double, etc. because they don't require a <code>using System;</code> statement :) A silly reason, I know...
+
+------------------------------------------------------------------------
+
+["In", "C#", ",", "int", "is", "just", "an", "alias", "for", "<code>System.Int32</code>", ",", "string", "for", "<code>System.String</code>", ",", "double", "for", "<code>System.Double</code>", "etc", "...", "Personally", "I", "prefer", "int", ",", "string", ",", "double", ",", "etc.", "because", "they", "do", "n't", "require", "a", "<code>using System;</code>", "statement", ":)", "A", "silly", "reason", ",", "I", "know", "..."]
+
+========================================================================
+
+
+
+POST 29
+
+I'll add to the excellent answers given above, and talk about boxing and unboxing, and how this applies to Java (although C# has it too). I'll use just Java terminology, because I am more au fait with that.
+
+As the answers mentioned, <code>int</code> is just a number (called the unboxed type), whereas <code>Integer</code> is an object (which contains the number, hence a boxed type). In Java terms, that means (apart from not being able to call methods on <code>int</code>), you cannot store <code>int</code> or other non-object types in collections (<code>List</code>, <code>Map</code>, etc.). In order to store them, you must first box them up in its corresponding boxed type.
+
+Java 5 onwards have something called auto-boxing and auto-unboxing which allow the boxing/unboxing to be done behind the scenes. Compare and contrast: Java 5 version:
+
+It must be noted that despite the brevity in the Java 5 version, both versions generate identical bytecode. Thus, although auto-boxing and auto-unboxing is very convenient because you write less code, these operations do happen behind the scenes, with the same runtime costs, so you still have to be aware of their existence.
+
+Hope this helps!
+
+------------------------------------------------------------------------
+
+["I", "'ll", "add", "to", "the", "excellent", "answers", "given", "above", ",", "and", "talk", "about", "boxing", "and", "unboxing", ",", "and", "how", "this", "applies", "to", "Java", "(", "although", "C#", "has", "it", "too", ")", ".", "I", "'ll", "use", "just", "Java", "terminology", ",", "because", "I", "am", "more", "au", "fait", "with", "that", ".", "As", "the", "answers", "mentioned", ",", "<code>int</code>", "is", "just", "a", "number", "(", "called", "the", "unboxed", "type", ")", ",", "whereas", "<code>Integer</code>", "is", "an", "object", "(", "which", "contains", "the", "number", ",", "hence", "a", "boxed", "type", ")", ".", "In", "Java", "terms", ",", "that", "means", "(", "apart", "from", "not", "being", "able", "to", "call", "methods", "on", "<code>int</code>", ")", ",", "you", "cannot", "store", "<code>int</code>", "or", "other", "non", "-", "object", "types", "in", "collections", "(", "<code>List</code>", ",", "<code>Map</code>", ",", "etc.", ")", ".", "In", "order", "to", "store", "them", ",", "you", "must", "first", "box", "them", "up", "in", "its", "corresponding", "boxed", "type", ".", "Java", "5", "onwards", "have", "something", "called", "auto", "-", "boxing", "and", "auto", "-", "unboxing", "which", "allow", "the", "boxing", "/", "unboxing", "to", "be", "done", "behind", "the", "scenes", ".", "Compare", "and", "contrast", ":", "Java", "5", "version", ":", "It", "must", "be", "noted", "that", "despite", "the", "brevity", "in", "the", "Java", "5", "version", ",", "both", "versions", "generate", "identical", "bytecode", ".", "Thus", ",", "although", "auto", "-", "boxing", "and", "auto", "-", "unboxing", "is", "very", "convenient", "because", "you", "write", "less", "code", ",", "these", "operations", "do", "happen", "behind", "the", "scenes", ",", "with", "the", "same", "runtime", "costs", ",", "so", "you", "still", "have", "to", "be", "aware", "of", "their", "existence", ".", "Hope", "this", "helps", "!"]
+
+========================================================================
+
+
+
+POST 30
+
+I'll just post here since some of the other posts are slightly inaccurate in relation to C#.
+
+Correct: <code>int</code> is an alias for <code>System.Int32</code>.
+Wrong: <code>float</code> is not an alias for <code>System.Float</code>, but for <code>System.Single</code>
+
+Basically, int is a reserved keyword in the C# programming language, and is an alias for the <code>System.Int32</code> value type.
+
+float and Float is not the same however, as the right system type for ''<code>float</code>'' is System.Single. There are some types like this that has reserved keywords that doesn't seem to match the type names directly.
+
+In C# there is no difference between ''<code>int</code>'' and ''<code>System.Int32</code>'', or any of the other pairs or keywords/system types, except for when defining enums. With enums you can specify the storage size to use and in this case you can only use the reserved keyword, and not the system runtime type name.
+
+Wether the value in the int will be stored on the stack, in memory, or as a referenced heap object depends on the context and how you use it.
+
+This declaration in a method:
+
+this will create a boxed copy of the contents of <code>i</code> on the heap. In IL you can access methods on the heap object directly, but in C# you need to cast it back to an int, which will create another copy. Thus, the object on the heap cannot easily be changed in C# without creating a new boxed copy of a new int value. (Ugh, this paragraph doesn't read all that easily.)
+
+------------------------------------------------------------------------
+
+["I", "'ll", "just", "post", "here", "since", "some", "of", "the", "other", "posts", "are", "slightly", "inaccurate", "in", "relation", "to", "C#", ".", "Correct", ":", "<code>int</code>", "is", "an", "alias", "for", "<code>System.Int32</code>", ".", "Wrong", ":", "<code>float</code>", "is", "not", "an", "alias", "for", "<code>System.Float</code>", ",", "but", "for", "<code>System.Single</code>", "Basically", ",", "int", "is", "a", "reserved", "keyword", "in", "the", "C#", "programming", "language", ",", "and", "is", "an", "alias", "for", "the", "<code>System.Int32</code>", "value", "type", ".", "float", "and", "Float", "is", "not", "the", "same", "however", ",", "as", "the", "right", "system", "type", "for", "'", "'", "<code>float</code>", "'", "'", "is", "System", ".", "Single", ".", "There", "are", "some", "types", "like", "this", "that", "has", "reserved", "keywords", "that", "does", "n't", "seem", "to", "match", "the", "type", "names", "directly", ".", "In", "C#", "there", "is", "no", "difference", "between", "'", "'", "<code>int</code>", "'", "'", "and", "'", "'", "<code>System.Int32</code>", "'", "'", ",", "or", "any", "of", "the", "other", "pairs", "or", "keywords", "/", "system", "types", ",", "except", "for", "when", "defining", "enums", ".", "With", "enums", "you", "can", "specify", "the", "storage", "size", "to", "use", "and", "in", "this", "case", "you", "can", "only", "use", "the", "reserved", "keyword", ",", "and", "not", "the", "system", "runtime", "type", "name", ".", "Wether", "the", "value", "in", "the", "int", "will", "be", "stored", "on", "the", "stack", ",", "in", "memory", ",", "or", "as", "a", "referenced", "heap", "object", "depends", "on", "the", "context", "and", "how", "you", "use", "it", ".", "This", "declaration", "in", "a", "method", ":", "this", "will", "create", "a", "boxed", "copy", "of", "the", "contents", "of", "<code>i</code>", "on", "the", "heap", ".", "In", "IL", "you", "can", "access", "methods", "on", "the", "heap", "object", "directly", ",", "but", "in", "C#", "you", "need", "to", "cast", "it", "back", "to", "an", "int", ",", "which", "will", "create", "another", "copy", ".", "Thus", ",", "the", "object", "on", "the", "heap", "cannot", "easily", "be", "changed", "in", "C#", "without", "creating", "a", "new", "boxed", "copy", "of", "a", "new", "int", "value", ".", "(", "Ugh", ",", "this", "paragraph", "does", "n't", "read", "all", "that", "easily", ".", ")"]
+
+========================================================================
+
+
+
+POST 31
+
+This has already been answered for Java, here's the C# answer:
+
+"Integer" is not a valid type name in C# and "int" is just an alias for System.Int32. Also, unlike in Java (or C++) there aren't any special primitive types in C#, every instance of a type in C# (including int) is an object. Here's some demonstrative code:
+
+------------------------------------------------------------------------
+
+["This", "has", "already", "been", "answered", "for", "Java", ",", "here", "'s", "the", "C#", "answer", ":", """, "Integer", """, "is", "not", "a", "valid", "type", "name", "in", "C#", "and", """, "int", """, "is", "just", "an", "alias", "for", "System", ".", "Int32", ".", "Also", ",", "unlike", "in", "Java", "(", "or", "C++", ")", "there", "are", "n't", "any", "special", "primitive", "types", "in", "C#", ",", "every", "instance", "of", "a", "type", "in", "C#", "(", "including", "int", ")", "is", "an", "object", ".", "Here", "'s", "some", "demonstrative", "code", ":"]
+
+========================================================================
+
+
+
+POST 32
+
+Regarding Java 1.5 and autoboxing there is an important "quirk" that comes to play when comparing Integer objects.
+
+In Java, Integer objects with the values -128 to 127 are immutable (that is, for one particular integer value, say 23, all Integer objects instantiated through your program with the value 23 points to the exact same object).
+
+Example, this returns true:
+
+More info at java.net Example at bexhuff.com
+
+------------------------------------------------------------------------
+
+["Regarding", "Java", "1.5", "and", "autoboxing", "there", "is", "an", "important", """, "quirk", """, "that", "comes", "to", "play", "when", "comparing", "Integer", "objects", ".", "In", "Java", ",", "Integer", "objects", "with", "the", "values", "-", "128", "to", "127", "are", "immutable", "(", "that", "is", ",", "for", "one", "particular", "integer", "value", ",", "say", "23", ",", "all", "Integer", "objects", "instantiated", "through", "your", "program", "with", "the", "value", "23", "points", "to", "the", "exact", "same", "object", ")", ".", "Example", ",", "this", "returns", "true", ":", "More", "info", "at", "java.net", "Example", "at", "bexhuff.com"]
+
+========================================================================
+
+
+
+POST 33
+
+In Java there are two basic types in the JVM. 1) Primitive types and 2) Reference Types. int is a primitive type and Integer is a class type (which is kind of reference type).
+
+Primitive values do not share state with other primitive values. A variable whose type is a primitive type always holds a primitive value of that type.
+
+Do you see the difference now?
+
+------------------------------------------------------------------------
+
+["In", "Java", "there", "are", "two", "basic", "types", "in", "the", "JVM", ".", "1", ")", "Primitive", "types", "and", "2", ")", "Reference", "Types", ".", "int", "is", "a", "primitive", "type", "and", "Integer", "is", "a", "class", "type", "(", "which", "is", "kind", "of", "reference", "type", ")", ".", "Primitive", "values", "do", "not", "share", "state", "with", "other", "primitive", "values", ".", "A", "variable", "whose", "type", "is", "a", "primitive", "type", "always", "holds", "a", "primitive", "value", "of", "that", "type", ".", "Do", "you", "see", "the", "difference", "now", "?"]
+
+========================================================================
+
+
+
+POST 34
+
+One more thing that I don't see in previous answers:
+In Java the primitive wrappers classes like Integer, Double, Float, Boolean... and String are suposed to be invariant, so that when you pass an instance of those classes the invoked method couldn't alter your data in any way, in opositión with most of other classes, which internal data could be altered by its public methods. So that this classes only has 'getter' methods, no 'setters', besides the constructor.
+
+In a java program String literals are stored in a separate portion of heap memory, only a instance for literal, to save memory reusing those instances
+
+------------------------------------------------------------------------
+
+["One", "more", "thing", "that", "I", "do", "n't", "see", "in", "previous", "answers", ":", "In", "Java", "the", "primitive", "wrappers", "classes", "like", "Integer", ",", "Double", ",", "Float", ",", "Boolean", "...", "and", "String", "are", "suposed", "to", "be", "invariant", ",", "so", "that", "when", "you", "pass", "an", "instance", "of", "those", "classes", "the", "invoked", "method", "could", "n't", "alter", "your", "data", "in", "any", "way", ",", "in", "opositión", "with", "most", "of", "other", "classes", ",", "which", "internal", "data", "could", "be", "altered", "by", "its", "public", "methods", ".", "So", "that", "this", "classes", "only", "has", "'", "getter", "'", "methods", ",", "no", "'", "setters", "'", ",", "besides", "the", "constructor", ".", "In", "a", "java", "program", "String", "literals", "are", "stored", "in", "a", "separate", "portion", "of", "heap", "memory", ",", "only", "a", "instance", "for", "literal", ",", "to", "save", "memory", "reusing", "those", "instances"]
+
+========================================================================
+
+
+
+POST 35
+
+Looking for books or other references that discuss actually "how" to write a code coverage tool in Java; some of the various techniques or tricks - source vs. byte code instrumentation. This is for a scripting language that generates java byte code under the hood.
+
+------------------------------------------------------------------------
+
+["Looking", "for", "books", "or", "other", "references", "that", "discuss", "actually", """, "how", """, "to", "write", "a", "code", "coverage", "tool", "in", "Java", ";", "some", "of", "the", "various", "techniques", "or", "tricks", "-", "source", "vs", ".", "byte", "code", "instrumentation", ".", "This", "is", "for", "a", "scripting", "language", "that", "generates", "java", "byte", "code", "under", "the", "hood", "."]
+
+========================================================================
+
+
+
+POST 36
+
+Thxm, Mc! http://asm.objectweb.org/ is another one. Excellent documentation on byte code instrumentation, but nothing "directly" aimed at writing a coverage tool - just some hints or ideas.
+
+------------------------------------------------------------------------
+
+["Thxm", ",", "Mc", "!", "http://asm.objectweb.org/", "is", "another", "one", ".", "Excellent", "documentation", "on", "byte", "code", "instrumentation", ",", "but", "nothing", """, "directly", """, "aimed", "at", "writing", "a", "coverage", "tool", "-", "just", "some", "hints", "or", "ideas", "."]
+
+========================================================================
+
+
+
+POST 37
+
+Is your scripting language bytecode generating? Does it generate debug metadata? If so, bytecode instrumentation is probably the way to go. In fact existing tools like will probably work; perhaps with minimal modification (the typical problem is the tools are written to work with Java and assume com.foo.Bar.class corresponds to com/foo/Bar.java. Unwinding that assumption can be tedious.) EMMA is a ClassLoader that does byte-code re-writing for code-coverage collection in Java. The coding style is a little funky, but I recommend reading the source for some ideas.
+
+If your scripting language is interpreted then you will need something higher-level (source level) that hooks into the interpreter.
+
+------------------------------------------------------------------------
+
+["Is", "your", "scripting", "language", "bytecode", "generating", "?", "Does", "it", "generate", "debug", "metadata", "?", "If", "so", ",", "bytecode", "instrumentation", "is", "probably", "the", "way", "to", "go", ".", "In", "fact", "existing", "tools", "like", "will", "probably", "work", ";", "perhaps", "with", "minimal", "modification", "(", "the", "typical", "problem", "is", "the", "tools", "are", "written", "to", "work", "with", "Java", "and", "assume", "com.foo.Bar.class", "corresponds", "to", "com/foo/Bar.java", ".", "Unwinding", "that", "assumption", "can", "be", "tedious", ".", ")", "EMMA", "is", "a", "ClassLoader", "that", "does", "byte", "-", "code", "re", "-", "writing", "for", "code", "-", "coverage", "collection", "in", "Java", ".", "The", "coding", "style", "is", "a", "little", "funky", ",", "but", "I", "recommend", "reading", "the", "source", "for", "some", "ideas", ".", "If", "your", "scripting", "language", "is", "interpreted", "then", "you", "will", "need", "something", "higher", "-", "level", "(", "source", "level", ")", "that", "hooks", "into", "the", "interpreter", "."]
+
+========================================================================
+
+
+
+POST 38
+
+You can also get the source from a Open Source code coverage tool and learn from it.
+
+------------------------------------------------------------------------
+
+["You", "can", "also", "get", "the", "source", "from", "a", "Open", "Source", "code", "coverage", "tool", "and", "learn", "from", "it", "."]
+
+========================================================================
+
+
+
+POST 39
+
+You might also want to use something like BCEL to analyse which lines of source actually exist in the byte-code.  You don't want to report that things like blank lines and comments haven't been covered.
+
+------------------------------------------------------------------------
+
+["You", "might", "also", "want", "to", "use", "something", "like", "BCEL", "to", "analyse", "which", "lines", "of", "source", "actually", "exist", "in", "the", "byte", "-", "code", ".", "You", "do", "n't", "want", "to", "report", "that", "things", "like", "blank", "lines", "and", "comments", "have", "n't", "been", "covered", "."]
+
+========================================================================
+
+
+
+POST 40
+
+Is there a way to create a <code>JButton</code> with your own button graphic and not just with an image inside the button? 
+
+If not, is there another way to create a custom button in java?
+
+------------------------------------------------------------------------
+
+["Is", "there", "a", "way", "to", "create", "a", "<code>JButton</code>", "with", "your", "own", "button", "graphic", "and", "not", "just", "with", "an", "image", "inside", "the", "button", "?", "If", "not", ",", "is", "there", "another", "way", "to", "create", "a", "custom", "button", "in", "java", "?"]
+
+========================================================================
+
+
+
+POST 41
+
+I haven't done SWING development since my early CS classes but if it wasn't built in you could just inherit javax.swing.AbstractButton and create your own. Should be pretty simple to wire something together with their existing framework.
+
+------------------------------------------------------------------------
+
+["I", "have", "n't", "done", "SWING", "development", "since", "my", "early", "CS", "classes", "but", "if", "it", "was", "n't", "built", "in", "you", "could", "just", "inherit", "javax.swing.AbstractButton", "and", "create", "your", "own", ".", "Should", "be", "pretty", "simple", "to", "wire", "something", "together", "with", "their", "existing", "framework", "."]
+
+========================================================================
+
+
+
+POST 42
+
+You could always try the Synth look & feel. You provide an xml file that acts as a sort of stylesheet, along with any images you want to use. The code might look like this:
+
+The bind element there specifies what to map to (in this example, it will apply that styling to any buttons whose name property has been set to "dirt").
+
+And a couple of useful links:
+
+http://javadesktop.org/articles/synth/
+
+http://docs.oracle.com/javase/tutorial/uiswing/lookandfeel/synth.html
+
+------------------------------------------------------------------------
+
+["You", "could", "always", "try", "the", "Synth", "look", "&", "feel", ".", "You", "provide", "an", "xml", "file", "that", "acts", "as", "a", "sort", "of", "stylesheet", ",", "along", "with", "any", "images", "you", "want", "to", "use", ".", "The", "code", "might", "look", "like", "this", ":", "The", "bind", "element", "there", "specifies", "what", "to", "map", "to", "(", "in", "this", "example", ",", "it", "will", "apply", "that", "styling", "to", "any", "buttons", "whose", "name", "property", "has", "been", "set", "to", """, "dirt", """, ")", ".", "And", "a", "couple", "of", "useful", "links", ":", "http://javadesktop.org/articles/synth/", "http://docs.oracle.com/javase/tutorial/uiswing/lookandfeel/synth.html"]
+
+========================================================================
+
+
+
+POST 43
+
+Yes, this is possible. One of the main pros for using Swing is the ease with which the abstract controls can be created and manipulates.
+
+Here is a quick and dirty way to extend the existing JButton class to draw a circle to the right of the text.
+
+Note that by overriding paintComponent that the contents of the button can be changed, but that the border is painted by the paintBorder method. The getPreferredSize method also needs to be managed in order to dynamically support changes to the content. Care needs to be taken when measuring font metrics and image dimensions.
+
+For creating a control that you can rely on, the above code is not the correct approach. Dimensions and colours are dynamic in Swing and are dependent on the look and feel being used. Even the default Metal look has changed across JRE versions. It would be better to implement AbstractButton and conform to the guidelines set out by the Swing API. A good starting point is to look at the javax.swing.LookAndFeel and javax.swing.UIManager classes.
+
+http://docs.oracle.com/javase/8/docs/api/javax/swing/LookAndFeel.html
+
+http://docs.oracle.com/javase/8/docs/api/javax/swing/UIManager.html
+
+Understanding the anatomy of LookAndFeel is useful for writing controls:
+Creating a Custom Look and Feel
+
+------------------------------------------------------------------------
+
+["Yes", ",", "this", "is", "possible", ".", "One", "of", "the", "main", "pros", "for", "using", "Swing", "is", "the", "ease", "with", "which", "the", "abstract", "controls", "can", "be", "created", "and", "manipulates", ".", "Here", "is", "a", "quick", "and", "dirty", "way", "to", "extend", "the", "existing", "JButton", "class", "to", "draw", "a", "circle", "to", "the", "right", "of", "the", "text", ".", "Note", "that", "by", "overriding", "paintComponent", "that", "the", "contents", "of", "the", "button", "can", "be", "changed", ",", "but", "that", "the", "border", "is", "painted", "by", "the", "paintBorder", "method", ".", "The", "getPreferredSize", "method", "also", "needs", "to", "be", "managed", "in", "order", "to", "dynamically", "support", "changes", "to", "the", "content", ".", "Care", "needs", "to", "be", "taken", "when", "measuring", "font", "metrics", "and", "image", "dimensions", ".", "For", "creating", "a", "control", "that", "you", "can", "rely", "on", ",", "the", "above", "code", "is", "not", "the", "correct", "approach", ".", "Dimensions", "and", "colours", "are", "dynamic", "in", "Swing", "and", "are", "dependent", "on", "the", "look", "and", "feel", "being", "used", ".", "Even", "the", "default", "Metal", "look", "has", "changed", "across", "JRE", "versions", ".", "It", "would", "be", "better", "to", "implement", "AbstractButton", "and", "conform", "to", "the", "guidelines", "set", "out", "by", "the", "Swing", "API", ".", "A", "good", "starting", "point", "is", "to", "look", "at", "the", "javax.swing.LookAndFeel", "and", "javax.swing.UIManager", "classes", ".", "http://docs.oracle.com/javase/8/docs/api/javax/swing/LookAndFeel.html", "http://docs.oracle.com/javase/8/docs/api/javax/swing/UIManager.html", "Understanding", "the", "anatomy", "of", "LookAndFeel", "is", "useful", "for", "writing", "controls", ":", "Creating", "a", "Custom", "Look", "and", "Feel"]
+
+========================================================================
+
+
+
+POST 44
+
+When I was first learning Java we had to make Yahtzee and I thought it would be cool to create custom Swing components and containers instead of just drawing everything on one <code>JPanel</code>.  The benefit of extending <code>Swing</code> components, of course, is to have the ability to add support for keyboard shortcuts and other accessibility features that you can't do just by having a <code>paint()</code> method print a pretty picture.  It may not be done the best way however, but it may be a good starting point for you.
+
+Edit 8/6 - If it wasn't apparent from the images, each Die is a button you can click. This will move it to the <code>DiceContainer</code> below.  Looking at the source code you can see that each Die button is drawn dynamically, based on its value.
+
+Here are the basic steps:
+
+Create a class that extends <code>JComponent</code>
+Call parent constructor <code>super()</code> in your constructors
+Make sure you class implements <code>MouseListener</code>
+Put this in the constructor:
+
+The amount of space you have to work with when drawing your button is defined by <code>getPreferredSize()</code>, assuming <code>getMinimumSize()</code> and <code>getMaximumSize()</code> return the same value.  I haven't experimented too much with this but, depending on the layout you use for your GUI your button could look completely different.
+
+And finally, the source code.  In case I missed anything.
+
+------------------------------------------------------------------------
+
+["When", "I", "was", "first", "learning", "Java", "we", "had", "to", "make", "Yahtzee", "and", "I", "thought", "it", "would", "be", "cool", "to", "create", "custom", "Swing", "components", "and", "containers", "instead", "of", "just", "drawing", "everything", "on", "one", "<code>JPanel</code>", ".", "The", "benefit", "of", "extending", "<code>Swing</code>", "components", ",", "of", "course", ",", "is", "to", "have", "the", "ability", "to", "add", "support", "for", "keyboard", "shortcuts", "and", "other", "accessibility", "features", "that", "you", "ca", "n't", "do", "just", "by", "having", "a", "<code>paint()</code>", "method", "print", "a", "pretty", "picture", ".", "It", "may", "not", "be", "done", "the", "best", "way", "however", ",", "but", "it", "may", "be", "a", "good", "starting", "point", "for", "you", ".", "Edit", "8", "/", "6", "-", "If", "it", "was", "n't", "apparent", "from", "the", "images", ",", "each", "Die", "is", "a", "button", "you", "can", "click", ".", "This", "will", "move", "it", "to", "the", "<code>DiceContainer</code>", "below", ".", "Looking", "at", "the", "source", "code", "you", "can", "see", "that", "each", "Die", "button", "is", "drawn", "dynamically", ",", "based", "on", "its", "value", ".", "Here", "are", "the", "basic", "steps", ":", "Create", "a", "class", "that", "extends", "<code>JComponent</code>", "Call", "parent", "constructor", "<code>super()</code>", "in", "your", "constructors", "Make", "sure", "you", "class", "implements", "<code>MouseListener</code>", "Put", "this", "in", "the", "constructor", ":", "The", "amount", "of", "space", "you", "have", "to", "work", "with", "when", "drawing", "your", "button", "is", "defined", "by", "<code>getPreferredSize()</code>", ",", "assuming", "<code>getMinimumSize()</code>", "and", "<code>getMaximumSize()</code>", "return", "the", "same", "value", ".", "I", "have", "n't", "experimented", "too", "much", "with", "this", "but", ",", "depending", "on", "the", "layout", "you", "use", "for", "your", "GUI", "your", "button", "could", "look", "completely", "different", ".", "And", "finally", ",", "the", "source", "code", ".", "In", "case", "I", "missed", "anything", "."]
+
+========================================================================
+
+
+
+POST 45
+
+I'm probably going a million miles in the wrong direct (but i'm only young :P ). but couldn't you add the graphic to a panel and then a mouselistener to the graphic object so that when the user on the graphic your action is preformed.
+
+------------------------------------------------------------------------
+
+["I", "'m", "probably", "going", "a", "million", "miles", "in", "the", "wrong", "direct", "(", "but", "i", "'m", "only", "young", ":P", ")", ".", "but", "could", "n't", "you", "add", "the", "graphic", "to", "a", "panel", "and", "then", "a", "mouselistener", "to", "the", "graphic", "object", "so", "that", "when", "the", "user", "on", "the", "graphic", "your", "action", "is", "preformed", "."]
+
+========================================================================
+
+
+
+POST 46
+
+I have been working with JXTA 2.3 for the last year or so for a peer-to-peer computing platform I am developing. I am migrating to JXTA 2.5 and in the process I am trying to clean up a lot of my use of JXTA. For the most part, I approached JXTA with a just make it work attitude. I used it to jumpstart creating and managing my peer-to-peer overlay network and providing basic communication services. I would like to use it in a more JXTA way since I am making changes to move to 2.5 anyway.
+
+My first step would be a basic creation of a custom <code>PeerGroup</code>. I see some new new mechanisms that are using the <code>META-INF.services</code> infrastructure of Java. Should I be listing a related <code>PeerGroup</code> implementing object here with a GUID in <code>net.jxta.platform.Module</code>? As I understand it, if I do this, when a group with a spec ID matching the GUID is encountered and joined or created it should automatically use the matching object. I should be able to just manually tie a <code>PeerGroup</code> object to the group but this new method using <code>META-INF</code> seems to be a lot easier to manage.
+
+Does anyone have any pointers or examples of using this infrastructure for <code>PeerGroup</code> implementation? Also, some general information on the <code>META-INF.services</code> mechanism in Java would be helpful.
+
+------------------------------------------------------------------------
+
+["I", "have", "been", "working", "with", "JXTA", "2.3", "for", "the", "last", "year", "or", "so", "for", "a", "peer", "-", "to", "-", "peer", "computing", "platform", "I", "am", "developing", ".", "I", "am", "migrating", "to", "JXTA", "2.5", "and", "in", "the", "process", "I", "am", "trying", "to", "clean", "up", "a", "lot", "of", "my", "use", "of", "JXTA", ".", "For", "the", "most", "part", ",", "I", "approached", "JXTA", "with", "a", "just", "make", "it", "work", "attitude", ".", "I", "used", "it", "to", "jumpstart", "creating", "and", "managing", "my", "peer", "-", "to", "-", "peer", "overlay", "network", "and", "providing", "basic", "communication", "services", ".", "I", "would", "like", "to", "use", "it", "in", "a", "more", "JXTA", "way", "since", "I", "am", "making", "changes", "to", "move", "to", "2.5", "anyway", ".", "My", "first", "step", "would", "be", "a", "basic", "creation", "of", "a", "custom", "<code>PeerGroup</code>", ".", "I", "see", "some", "new", "new", "mechanisms", "that", "are", "using", "the", "<code>META-INF.services</code>", "infrastructure", "of", "Java", ".", "Should", "I", "be", "listing", "a", "related", "<code>PeerGroup</code>", "implementing", "object", "here", "with", "a", "GUID", "in", "<code>net.jxta.platform.Module</code>", "?", "As", "I", "understand", "it", ",", "if", "I", "do", "this", ",", "when", "a", "group", "with", "a", "spec", "ID", "matching", "the", "GUID", "is", "encountered", "and", "joined", "or", "created", "it", "should", "automatically", "use", "the", "matching", "object", ".", "I", "should", "be", "able", "to", "just", "manually", "tie", "a", "<code>PeerGroup</code>", "object", "to", "the", "group", "but", "this", "new", "method", "using", "<code>META-INF</code>", "seems", "to", "be", "a", "lot", "easier", "to", "manage", ".", "Does", "anyone", "have", "any", "pointers", "or", "examples", "of", "using", "this", "infrastructure", "for", "<code>PeerGroup</code>", "implementation", "?", "Also", ",", "some", "general", "information", "on", "the", "<code>META-INF.services</code>", "mechanism", "in", "Java", "would", "be", "helpful", "."]
+
+========================================================================
+
+
+
+POST 47
+
+The META-INF.services stuff is known by its class name in the API: ServiceLoader. A Google search for ServiceLoader yields some information.
+
+I am not really familiar with it, but sometimes it's all about knowing the right search keywords.
+
+------------------------------------------------------------------------
+
+["The", "META", "-", "INF", ".", "services", "stuff", "is", "known", "by", "its", "class", "name", "in", "the", "API", ":", "ServiceLoader", ".", "A", "Google", "search", "for", "ServiceLoader", "yields", "some", "information", ".", "I", "am", "not", "really", "familiar", "with", "it", ",", "but", "sometimes", "it", "'s", "all", "about", "knowing", "the", "right", "search", "keywords", "."]
+
+========================================================================
+
+
+
+POST 48
+
+For parsing player commands, I've most often used the split method to split a string by delimiters and then to then just figure out the rest by a series of <code>if</code>s or <code>switch</code>es. What are some different ways of parsing strings in Java?
+
+------------------------------------------------------------------------
+
+["For", "parsing", "player", "commands", ",", "I", "'ve", "most", "often", "used", "the", "split", "method", "to", "split", "a", "string", "by", "delimiters", "and", "then", "to", "then", "just", "figure", "out", "the", "rest", "by", "a", "series", "of", "<code>if</code>", "s", "or", "<code>switch</code>", "es", ".", "What", "are", "some", "different", "ways", "of", "parsing", "strings", "in", "Java", "?"]
+
+========================================================================
+
+
+
+POST 49
+
+I really like regular expressions. As long as the command strings are fairly simple, you can write a few regexes that could take a few pages of code to manually parse.
+
+I would suggest you check out http://www.regular-expressions.info for a good intro to regexes, as well as specific examples for Java.
+
+------------------------------------------------------------------------
+
+["I", "really", "like", "regular", "expressions", ".", "As", "long", "as", "the", "command", "strings", "are", "fairly", "simple", ",", "you", "can", "write", "a", "few", "regexes", "that", "could", "take", "a", "few", "pages", "of", "code", "to", "manually", "parse", ".", "I", "would", "suggest", "you", "check", "out", "http://www.regular-expressions.info", "for", "a", "good", "intro", "to", "regexes", ",", "as", "well", "as", "specific", "examples", "for", "Java", "."]
+
+========================================================================
+
+
+
+POST 50
+
+A simple string tokenizer on spaces should work, but there are really many ways you could do this.
+
+Here is an example using a tokenizer:
+
+Then tokens can be further used for the arguments.  This all assumes no spaces are used in the arguments... so you might want to roll your own simple parsing mechanism (like getting the first whitespace and using text before as the action, or using a regular expression if you don't mind the speed hit), just abstract it out so it can be used anywhere.
+
+------------------------------------------------------------------------
+
+["A", "simple", "string", "tokenizer", "on", "spaces", "should", "work", ",", "but", "there", "are", "really", "many", "ways", "you", "could", "do", "this", ".", "Here", "is", "an", "example", "using", "a", "tokenizer", ":", "Then", "tokens", "can", "be", "further", "used", "for", "the", "arguments", ".", "This", "all", "assumes", "no", "spaces", "are", "used", "in", "the", "arguments", "...", "so", "you", "might", "want", "to", "roll", "your", "own", "simple", "parsing", "mechanism", "(", "like", "getting", "the", "first", "whitespace", "and", "using", "text", "before", "as", "the", "action", ",", "or", "using", "a", "regular", "expression", "if", "you", "do", "n't", "mind", "the", "speed", "hit", ")", ",", "just", "abstract", "it", "out", "so", "it", "can", "be", "used", "anywhere", "."]
+
+========================================================================
+
+
+
+POST 51
+
+I would look at Java migrations of Zork, and lean towards a simple Natural Language Processor (driven either by tokenizing or regex) such as the following (from this link):
+
+...
+
+Anything which gives a programmer a reason to look at Zork again is good in my book, just watch out for Grues.
+
+...
+
+------------------------------------------------------------------------
+
+["I", "would", "look", "at", "Java", "migrations", "of", "Zork", ",", "and", "lean", "towards", "a", "simple", "Natural", "Language", "Processor", "(", "driven", "either", "by", "tokenizing", "or", "regex", ")", "such", "as", "the", "following", "(", "from", "this", "link", ")", ":", "...", "Anything", "which", "gives", "a", "programmer", "a", "reason", "to", "look", "at", "Zork", "again", "is", "good", "in", "my", "book", ",", "just", "watch", "out", "for", "Grues", ".", "..."]
+
+========================================================================
+
+
+
+POST 52
+
+I assume you're trying to make the command interface as forgiving as possible. If this is the case, I suggest you use an algorithm similar to this:
+
+Read in the string
+
+Split the string into tokens
+Use a dictionary to convert synonyms to a common form 
+For example, convert "hit", "punch", "strike", and "kick" all to "hit"
+Perform actions on an unordered, inclusive base
+Unordered - "punch the monkey in the face" is the same thing as "the face in the monkey punch"
+Inclusive - If the command is supposed to be "punch the monkey in the face" and they supply "punch monkey", you should check how many commands this matches. If only one command, do this action. It might even be a good idea to have command priorities, and even if there were even matches, it would perform the top action.
+
+------------------------------------------------------------------------
+
+["I", "assume", "you", "'re", "trying", "to", "make", "the", "command", "interface", "as", "forgiving", "as", "possible", ".", "If", "this", "is", "the", "case", ",", "I", "suggest", "you", "use", "an", "algorithm", "similar", "to", "this", ":", "Read", "in", "the", "string", "Split", "the", "string", "into", "tokens", "Use", "a", "dictionary", "to", "convert", "synonyms", "to", "a", "common", "form", "For", "example", ",", "convert", """, "hit", """, ",", """, "punch", """, ",", """, "strike", """, ",", "and", """, "kick", """, "all", "to", """, "hit", """, "Perform", "actions", "on", "an", "unordered", ",", "inclusive", "base", "Unordered", "-", """, "punch", "the", "monkey", "in", "the", "face", """, "is", "the", "same", "thing", "as", """, "the", "face", "in", "the", "monkey", "punch", """, "Inclusive", "-", "If", "the", "command", "is", "supposed", "to", "be", """, "punch", "the", "monkey", "in", "the", "face", """, "and", "they", "supply", """, "punch", "monkey", """, ",", "you", "should", "check", "how", "many", "commands", "this", "matches", ".", "If", "only", "one", "command", ",", "do", "this", "action", ".", "It", "might", "even", "be", "a", "good", "idea", "to", "have", "command", "priorities", ",", "and", "even", "if", "there", "were", "even", "matches", ",", "it", "would", "perform", "the", "top", "action", "."]
+
+========================================================================
+
+
+
+POST 53
+
+@CodingTheWheel Heres your code, a bit clean up and through eclipse (ctrl+shift+f) and the inserted back here :)
+
+Including the four spaces in front each line.
+
+------------------------------------------------------------------------
+
+["@", "CodingTheWheel", "Heres", "your", "code", ",", "a", "bit", "clean", "up", "and", "through", "eclipse", "(", "ctrl", "+", "shift", "+", "f", ")", "and", "the", "inserted", "back", "here", ":)", "Including", "the", "four", "spaces", "in", "front", "each", "line", "."]
+
+========================================================================
+
+
+
+POST 54
+
+When the separator String for the command is allways the same String or char (like the ";") y recomend you use the StrinkTokenizer class:
+
+StringTokenizer
+
+but when the separator varies or is complex y recomend you to use the regular expresions, wich can be used by the String class itself, method split, since 1.4. It uses the Pattern class from the java.util.regex package
+
+Pattern
+
+------------------------------------------------------------------------
+
+["When", "the", "separator", "String", "for", "the", "command", "is", "allways", "the", "same", "String", "or", "char", "(", "like", "the", """, ";", """, ")", "y", "recomend", "you", "use", "the", "StrinkTokenizer", "class", ":", "StringTokenizer", "but", "when", "the", "separator", "varies", "or", "is", "complex", "y", "recomend", "you", "to", "use", "the", "regular", "expresions", ",", "wich", "can", "be", "used", "by", "the", "String", "class", "itself", ",", "method", "split", ",", "since", "1.4", ".", "It", "uses", "the", "Pattern", "class", "from", "the", "java.util.regex", "package", "Pattern"]
+
+========================================================================
+
+
+
+POST 55
+
+Sun itself recommends staying away from StringTokenizer and using the String.spilt method instead. 
+
+You'll also want to look at the Pattern class.
+
+------------------------------------------------------------------------
+
+["Sun", "itself", "recommends", "staying", "away", "from", "StringTokenizer", "and", "using", "the", "String.spilt", "method", "instead", ".", "You", "'ll", "also", "want", "to", "look", "at", "the", "Pattern", "class", "."]
+
+========================================================================
+
+
+
+POST 56
+
+Parsing manually is a lot of fun... at the beginning:) 
+
+In practice if commands aren't very sophisticated you can treat them the same way as those used in command line interpreters. There's a list of libraries that you can use: http://java-source.net/open-source/command-line. I think you can start with apache commons CLI or args4j (uses annotations). They are well documented and really simple in use. They handle parsing automatically and the only thing you need to do is to read particular fields in an object.
+
+If you have more sophisticated commands, then maybe creating a formal grammar would be a better idea. There is a very good library with graphical editor, debugger and interpreter for grammars. It's called ANTLR (and the editor ANTLRWorks) and it's free:) There are also some example grammars and tutorials.
+
+------------------------------------------------------------------------
+
+["Parsing", "manually", "is", "a", "lot", "of", "fun", "...", "at", "the", "beginning", ":)", "In", "practice", "if", "commands", "are", "n't", "very", "sophisticated", "you", "can", "treat", "them", "the", "same", "way", "as", "those", "used", "in", "command", "line", "interpreters", ".", "There", "'s", "a", "list", "of", "libraries", "that", "you", "can", "use", ":", "http://java-source.net/open-source/command-line", ".", "I", "think", "you", "can", "start", "with", "apache", "commons", "CLI", "or", "args4j", "(", "uses", "annotations", ")", ".", "They", "are", "well", "documented", "and", "really", "simple", "in", "use", ".", "They", "handle", "parsing", "automatically", "and", "the", "only", "thing", "you", "need", "to", "do", "is", "to", "read", "particular", "fields", "in", "an", "object", ".", "If", "you", "have", "more", "sophisticated", "commands", ",", "then", "maybe", "creating", "a", "formal", "grammar", "would", "be", "a", "better", "idea", ".", "There", "is", "a", "very", "good", "library", "with", "graphical", "editor", ",", "debugger", "and", "interpreter", "for", "grammars", ".", "It", "'s", "called", "ANTLR", "(", "and", "the", "editor", "ANTLRWorks", ")", "and", "it", "'s", "free", ":)", "There", "are", "also", "some", "example", "grammars", "and", "tutorials", "."]
+
+========================================================================
+
+
+
+POST 57
+
+If this is to parse command lines I would suggest using Commons Cli.
+
+  The Apache Commons CLI library provides an API for processing command line interfaces.
+
+------------------------------------------------------------------------
+
+["If", "this", "is", "to", "parse", "command", "lines", "I", "would", "suggest", "using", "Commons", "Cli", ".", "The", "Apache", "Commons", "CLI", "library", "provides", "an", "API", "for", "processing", "command", "line", "interfaces", "."]
+
+========================================================================
+
+
+
+POST 58
+
+Another vote for ANTLR/ANTLRWorks.  If you create two versions of the file, one with the Java code for actually executing the commands, and one without (with just the grammar), then you have an executable specification of the language, which is great for testing, a boon for documentation, and a big timesaver if you ever decide to port it.
+
+------------------------------------------------------------------------
+
+["Another", "vote", "for", "ANTLR", "/", "ANTLRWorks", ".", "If", "you", "create", "two", "versions", "of", "the", "file", ",", "one", "with", "the", "Java", "code", "for", "actually", "executing", "the", "commands", ",", "and", "one", "without", "(", "with", "just", "the", "grammar", ")", ",", "then", "you", "have", "an", "executable", "specification", "of", "the", "language", ",", "which", "is", "great", "for", "testing", ",", "a", "boon", "for", "documentation", ",", "and", "a", "big", "timesaver", "if", "you", "ever", "decide", "to", "port", "it", "."]
+
+========================================================================
+
+
+
+POST 59
+
+Try JavaCC a parser generator for Java.
+
+It has a lot of features for interpreting languages, and it's well supported on Eclipse.
+
+------------------------------------------------------------------------
+
+["Try", "JavaCC", "a", "parser", "generator", "for", "Java", ".", "It", "has", "a", "lot", "of", "features", "for", "interpreting", "languages", ",", "and", "it", "'s", "well", "supported", "on", "Eclipse", "."]
+
+========================================================================
+
+
+
+POST 60
+
+I need to send and receive data over serial connections (RS-232 and RS-422).
+
+How do I set up and communicate with such a connection?  How do I figure out what the configuration settings (e.g. baud rate) should be and how do I set them?
+
+In particular I am looking to do this in Java, C/C++, or one of the major Unix shells but I also have some interest in serial programming using Windows/Hyperterminal.
+
+------------------------------------------------------------------------
+
+["I", "need", "to", "send", "and", "receive", "data", "over", "serial", "connections", "(", "RS", "-", "232", "and", "RS", "-", "422", ")", ".", "How", "do", "I", "set", "up", "and", "communicate", "with", "such", "a", "connection", "?", "How", "do", "I", "figure", "out", "what", "the", "configuration", "settings", "(", "e.g.", "baud", "rate", ")", "should", "be", "and", "how", "do", "I", "set", "them", "?", "In", "particular", "I", "am", "looking", "to", "do", "this", "in", "Java", ",", "C", "/", "C++", ",", "or", "one", "of", "the", "major", "Unix", "shells", "but", "I", "also", "have", "some", "interest", "in", "serial", "programming", "using", "Windows", "/", "Hyperterminal", "."]
+
+========================================================================
+
+
+
+POST 61
+
+Build a time machine and go back to 1987? Ho ho.
+
+Ok, no more snarky comments.
+
+  How do I figure out what the configuration settings (e.g. baud rate) should be...
+
+Read the datasheet? Ok, ok. Seriously, last one. If you don't know the baud rate of the device you are trying to communicate with, you have two choices. Start guessing, or possibly bust out an o-scope. If you need a good starting point, let me suggest 9600-8-N-1. My suspicion is you can get there with brute force relatively quickly. There's a third option of having an old-school ninja who can tell just by the LOOK of the garbled characters at some standard baud rate what actual baud rate is. An impressive party trick to be sure.
+
+Hopefully though you have access to this information. In unix/linux, you can get ahold of minicom to play with the serial port directly. This should make it fairly quick to get the configuration figured out.
+
+  one of the major Unix shells
+
+In Unix the serial port(s) is/are file-mapped into the /dev/ subdir. ttyS0, for example. If you setup the correct baud rate and whatnot using minicom, you can even cat stuff to that file to send stuff out there.
+
+On to the meat of the question, you can access it programmatically through the POSIX headers. termios.h is the big one. 
+
+See: http://www.easysw.com/~mike/serial/serial.html#3_1
+(NOT AVAILABLE ANYMORE)
+
+  but I also have some interest in serial programming using Windows/Hyperterminal.
+
+Hyperterminal and minicom are basically the same program. As for how Windows let's you get access to the serial port, I'll leave that question for someone else. I haven't done that in Windows since the Win95 days.
+
+------------------------------------------------------------------------
+
+["Build", "a", "time", "machine", "and", "go", "back", "to", "1987", "?", "Ho", "ho", ".", "Ok", ",", "no", "more", "snarky", "comments", ".", "How", "do", "I", "figure", "out", "what", "the", "configuration", "settings", "(", "e.g.", "baud", "rate", ")", "should", "be", "...", "Read", "the", "datasheet", "?", "Ok", ",", "ok", ".", "Seriously", ",", "last", "one", ".", "If", "you", "do", "n't", "know", "the", "baud", "rate", "of", "the", "device", "you", "are", "trying", "to", "communicate", "with", ",", "you", "have", "two", "choices", ".", "Start", "guessing", ",", "or", "possibly", "bust", "out", "an", "o", "-", "scope", ".", "If", "you", "need", "a", "good", "starting", "point", ",", "let", "me", "suggest", "9600", "-", "8", "-", "N", "-", "1", ".", "My", "suspicion", "is", "you", "can", "get", "there", "with", "brute", "force", "relatively", "quickly", ".", "There", "'s", "a", "third", "option", "of", "having", "an", "old", "-", "school", "ninja", "who", "can", "tell", "just", "by", "the", "LOOK", "of", "the", "garbled", "characters", "at", "some", "standard", "baud", "rate", "what", "actual", "baud", "rate", "is", ".", "An", "impressive", "party", "trick", "to", "be", "sure", ".", "Hopefully", "though", "you", "have", "access", "to", "this", "information", ".", "In", "unix", "/", "linux", ",", "you", "can", "get", "ahold", "of", "minicom", "to", "play", "with", "the", "serial", "port", "directly", ".", "This", "should", "make", "it", "fairly", "quick", "to", "get", "the", "configuration", "figured", "out", ".", "one", "of", "the", "major", "Unix", "shells", "In", "Unix", "the", "serial", "port", "(", "s", ")", "is", "/", "are", "file", "-", "mapped", "into", "the", "/dev/", "subdir", ".", "ttyS0", ",", "for", "example", ".", "If", "you", "setup", "the", "correct", "baud", "rate", "and", "whatnot", "using", "minicom", ",", "you", "can", "even", "cat", "stuff", "to", "that", "file", "to", "send", "stuff", "out", "there", ".", "On", "to", "the", "meat", "of", "the", "question", ",", "you", "can", "access", "it", "programmatically", "through", "the", "POSIX", "headers", ".", "termios", ".", "h", "is", "the", "big", "one", ".", "See", ":", "http://www.easysw.com/~mike/serial/serial.html#3_1", "(", "NOT", "AVAILABLE", "ANYMORE", ")", "but", "I", "also", "have", "some", "interest", "in", "serial", "programming", "using", "Windows", "/", "Hyperterminal", ".", "Hyperterminal", "and", "minicom", "are", "basically", "the", "same", "program", ".", "As", "for", "how", "Windows", "let", "'s", "you", "get", "access", "to", "the", "serial", "port", ",", "I", "'ll", "leave", "that", "question", "for", "someone", "else", ".", "I", "have", "n't", "done", "that", "in", "Windows", "since", "the", "Win95", "days", "."]
+
+========================================================================
+
+
+
+POST 62
+
+From the other side, if you want to do it using C#, which will run on both Windows and Linux--with some limitations (EDIT: which may be out of date. I have no way to test it.). Just create a SerialPort object, set its baudrate, port and any other odd settings, call open on it, and write out your byte[]s. After all the setup, the SerialPort object acts very similar to any networked stream, so it should be easy enough to figure out.
+
+And as ibrandy states, you need to know all these settings, like baud rate, before you even start attempting to communicate to any serial device.
+
+------------------------------------------------------------------------
+
+["From", "the", "other", "side", ",", "if", "you", "want", "to", "do", "it", "using", "C#", ",", "which", "will", "run", "on", "both", "Windows", "and", "Linux", "-", "-", "with", "some", "limitations", "(", "EDIT", ":", "which", "may", "be", "out", "of", "date", ".", "I", "have", "no", "way", "to", "test", "it", ".", ")", ".", "Just", "create", "a", "SerialPort", "object", ",", "set", "its", "baudrate", ",", "port", "and", "any", "other", "odd", "settings", ",", "call", "open", "on", "it", ",", "and", "write", "out", "your", "byte", "[", "]", "s", ".", "After", "all", "the", "setup", ",", "the", "SerialPort", "object", "acts", "very", "similar", "to", "any", "networked", "stream", ",", "so", "it", "should", "be", "easy", "enough", "to", "figure", "out", ".", "And", "as", "ibrandy", "states", ",", "you", "need", "to", "know", "all", "these", "settings", ",", "like", "baud", "rate", ",", "before", "you", "even", "start", "attempting", "to", "communicate", "to", "any", "serial", "device", "."]
+
+========================================================================
+
+
+
+POST 63
+
+At work we use teraterm and realterm for checking serial data is correctly formatted. Also we have a hardware splitter with a switch so we can monitor traffic to our application via a cable back to another port.
+
+Windows allows you access to the serial port via CreateFile. That gives you a handle and from there you can configure access.
+
+------------------------------------------------------------------------
+
+["At", "work", "we", "use", "teraterm", "and", "realterm", "for", "checking", "serial", "data", "is", "correctly", "formatted", ".", "Also", "we", "have", "a", "hardware", "splitter", "with", "a", "switch", "so", "we", "can", "monitor", "traffic", "to", "our", "application", "via", "a", "cable", "back", "to", "another", "port", ".", "Windows", "allows", "you", "access", "to", "the", "serial", "port", "via", "CreateFile", ".", "That", "gives", "you", "a", "handle", "and", "from", "there", "you", "can", "configure", "access", "."]
+
+========================================================================
+
+
+
+POST 64
+
+From Java the rxtx (NOT AVAILABLE ANYMORE)library is quite good. It picks up where Sun's serial IO framework left off.
+
+------------------------------------------------------------------------
+
+["From", "Java", "the", "rxtx", "(", "NOT", "AVAILABLE", "ANYMORE", ")", "library", "is", "quite", "good", ".", "It", "picks", "up", "where", "Sun", "'s", "serial", "IO", "framework", "left", "off", "."]
+
+========================================================================
+
+
+
+POST 65
+
+For C/C++ on Windows you have (at least) two choices:
+
+Use the SerialPort class provided by .NET.
+Use the Win32 API. There is an extensive MSDN article dating back to 1995, and many free libraries and examples on the web to get you started.
+
+The .NET option will be much easier.
+
+------------------------------------------------------------------------
+
+["For", "C", "/", "C++", "on", "Windows", "you", "have", "(", "at", "least", ")", "two", "choices", ":", "Use", "the", "SerialPort", "class", "provided", "by", ".NET", ".", "Use", "the", "Win32", "API", ".", "There", "is", "an", "extensive", "MSDN", "article", "dating", "back", "to", "1995", ",", "and", "many", "free", "libraries", "and", "examples", "on", "the", "web", "to", "get", "you", "started", ".", "The", ".NET", "option", "will", "be", "much", "easier", "."]
+
+========================================================================
+
+
+
+POST 66
+
+If you want to code in Java I really recommend SerialIOs SerialPort. It is very easy to use and saves you days of work. I've never found an open source library as good as SerialIO, REALLY!
+
+My advice: do not use Sun's serial IO framework! It is from 1998 and full of bugs. You can use rxtx but serialio is better!
+
+------------------------------------------------------------------------
+
+["If", "you", "want", "to", "code", "in", "Java", "I", "really", "recommend", "SerialIOs", "SerialPort", ".", "It", "is", "very", "easy", "to", "use", "and", "saves", "you", "days", "of", "work", ".", "I", "'ve", "never", "found", "an", "open", "source", "library", "as", "good", "as", "SerialIO", ",", "REALLY", "!", "My", "advice", ":", "do", "not", "use", "Sun", "'s", "serial", "IO", "framework", "!", "It", "is", "from", "1998", "and", "full", "of", "bugs", ".", "You", "can", "use", "rxtx", "but", "serialio", "is", "better", "!"]
+
+========================================================================
+
+
+
+POST 67
+
+If it needs to be cross platfrom, I would suggest looking at Boost Asio.
+
+------------------------------------------------------------------------
+
+["If", "it", "needs", "to", "be", "cross", "platfrom", ",", "I", "would", "suggest", "looking", "at", "Boost", "Asio", "."]
+
+========================================================================
+
+
+
+POST 68
+
+Awhile back I wrote a decent sized application to route connections from a farm of modems through to a TCP/IP network address.
+
+Initially I looked for an unencumbered (free) Serial IO library.  I tried Sun's, IBM's and RxTx.  They were fine for developing the application, and in initial testing, but in production they each proved unstable.
+
+Finally I paid for SerialIO's SerialPort.  Converting over was literally an exercise in changing imports, and the library has been absolutely rock solid - I cannot recommend it enough.  My application has been running in the field 24/7 for a couple of years now, with not a single problem encountered by multiple customers.
+
+If you start development using SerialPort, they have a better API and I would use it.
+
+If you need cross platform support, Java with SerialPort was the best choice I could find.
+
+Lastly, their licensing is pretty darn reasonable as long as you are not preinstalling software on the equipment for your customer(s).
+
+------------------------------------------------------------------------
+
+["Awhile", "back", "I", "wrote", "a", "decent", "sized", "application", "to", "route", "connections", "from", "a", "farm", "of", "modems", "through", "to", "a", "TCP", "/", "IP", "network", "address", ".", "Initially", "I", "looked", "for", "an", "unencumbered", "(", "free", ")", "Serial", "IO", "library", ".", "I", "tried", "Sun", "'s", ",", "IBM", "'s", "and", "RxTx", ".", "They", "were", "fine", "for", "developing", "the", "application", ",", "and", "in", "initial", "testing", ",", "but", "in", "production", "they", "each", "proved", "unstable", ".", "Finally", "I", "paid", "for", "SerialIO", "'s", "SerialPort", ".", "Converting", "over", "was", "literally", "an", "exercise", "in", "changing", "imports", ",", "and", "the", "library", "has", "been", "absolutely", "rock", "solid", "-", "I", "cannot", "recommend", "it", "enough", ".", "My", "application", "has", "been", "running", "in", "the", "field", "24", "/", "7", "for", "a", "couple", "of", "years", "now", ",", "with", "not", "a", "single", "problem", "encountered", "by", "multiple", "customers", ".", "If", "you", "start", "development", "using", "SerialPort", ",", "they", "have", "a", "better", "API", "and", "I", "would", "use", "it", ".", "If", "you", "need", "cross", "platform", "support", ",", "Java", "with", "SerialPort", "was", "the", "best", "choice", "I", "could", "find", ".", "Lastly", ",", "their", "licensing", "is", "pretty", "darn", "reasonable", "as", "long", "as", "you", "are", "not", "preinstalling", "software", "on", "the", "equipment", "for", "your", "customer", "(", "s", ")", "."]
+
+========================================================================
+
+
+
+POST 69
+
+I have a simple setter method for a property and <code>null</code> is not appropriate for this particular property. I have always been torn in this situation: should I throw an <code>IllegalArgumentException</code>, or a <code>NullPointerException</code>? From the javadocs, both seem appropriate. Is there some kind of an understood standard?  Or is this just one of those things that you should do whatever you prefer and both are really correct?
+
+------------------------------------------------------------------------
+
+["I", "have", "a", "simple", "setter", "method", "for", "a", "property", "and", "<code>null</code>", "is", "not", "appropriate", "for", "this", "particular", "property", ".", "I", "have", "always", "been", "torn", "in", "this", "situation", ":", "should", "I", "throw", "an", "<code>IllegalArgumentException</code>", ",", "or", "a", "<code>NullPointerException</code>", "?", "From", "the", "javadocs", ",", "both", "seem", "appropriate", ".", "Is", "there", "some", "kind", "of", "an", "understood", "standard", "?", "Or", "is", "this", "just", "one", "of", "those", "things", "that", "you", "should", "do", "whatever", "you", "prefer", "and", "both", "are", "really", "correct", "?"]
+
+========================================================================
+
+
+
+POST 70
+
+It seems like an <code>IllegalArgumentException</code> is called for if you don't want <code>null</code> to be an allowed value, and the <code>NullPointerException</code> would be thrown if you were trying to use a variable that turns out to be <code>null</code>.
+
+------------------------------------------------------------------------
+
+["It", "seems", "like", "an", "<code>IllegalArgumentException</code>", "is", "called", "for", "if", "you", "do", "n't", "want", "<code>null</code>", "to", "be", "an", "allowed", "value", ",", "and", "the", "<code>NullPointerException</code>", "would", "be", "thrown", "if", "you", "were", "trying", "to", "use", "a", "variable", "that", "turns", "out", "to", "be", "<code>null</code>", "."]
+
+========================================================================
+
+
+
+POST 71
+
+If it's a <code>setter</code> method and <code>null</code> is being passed to it, I think it would make more sense to throw an <code>IllegalArgumentException</code>. A <code>NullPointerException</code> seems to make more sense in the case where you're attempting to actually use the <code>null</code>.
+
+So, if you're using it and it's <code>null</code>, <code>NullPointer</code>. If it's being passed in and it's <code>null</code>, <code>IllegalArgument</code>.
+
+------------------------------------------------------------------------
+
+["If", "it", "'s", "a", "<code>setter</code>", "method", "and", "<code>null</code>", "is", "being", "passed", "to", "it", ",", "I", "think", "it", "would", "make", "more", "sense", "to", "throw", "an", "<code>IllegalArgumentException</code>", ".", "A", "<code>NullPointerException</code>", "seems", "to", "make", "more", "sense", "in", "the", "case", "where", "you", "'re", "attempting", "to", "actually", "use", "the", "<code>null</code>", ".", "So", ",", "if", "you", "'re", "using", "it", "and", "it", "'s", "<code>null</code>", ",", "<code>NullPointer</code>", ".", "If", "it", "'s", "being", "passed", "in", "and", "it", "'s", "<code>null</code>", ",", "<code>IllegalArgument</code>", "."]
+
+========================================================================
+
+
+
+POST 72
+
+I tend to follow the design of JDK libraries, especially Collections and Concurrency (Joshua Bloch, Doug Lea, those guys know how to design solid APIs). Anyway, many APIs in the JDK pro-actively throws <code>NullPointerException</code>. 
+
+For example, the Javadoc for <code>Map.containsKey</code> states:
+
+  @throws NullPointerException if the key is null and this map
+    does not permit null keys (optional).
+
+It's perfectly valid to throw your own NPE. The convention is to include the parameter name which was null in the message of the exception. 
+
+The pattern goes:
+
+Whatever you do, don't allow a bad value to get set and throw an exception later when other code attempts to use it. That makes debugging a nightmare. You should always the follow the "fail-fast" principle.
+
+------------------------------------------------------------------------
+
+["I", "tend", "to", "follow", "the", "design", "of", "JDK", "libraries", ",", "especially", "Collections", "and", "Concurrency", "(", "Joshua", "Bloch", ",", "Doug", "Lea", ",", "those", "guys", "know", "how", "to", "design", "solid", "APIs", ")", ".", "Anyway", ",", "many", "APIs", "in", "the", "JDK", "pro", "-", "actively", "throws", "<code>NullPointerException</code>", ".", "For", "example", ",", "the", "Javadoc", "for", "<code>Map.containsKey</code>", "states", ":", "@", "throws", "NullPointerException", "if", "the", "key", "is", "null", "and", "this", "map", "does", "not", "permit", "null", "keys", "(", "optional", ")", ".", "It", "'s", "perfectly", "valid", "to", "throw", "your", "own", "NPE", ".", "The", "convention", "is", "to", "include", "the", "parameter", "name", "which", "was", "null", "in", "the", "message", "of", "the", "exception", ".", "The", "pattern", "goes", ":", "Whatever", "you", "do", ",", "do", "n't", "allow", "a", "bad", "value", "to", "get", "set", "and", "throw", "an", "exception", "later", "when", "other", "code", "attempts", "to", "use", "it", ".", "That", "makes", "debugging", "a", "nightmare", ".", "You", "should", "always", "the", "follow", "the", """, "fail", "-", "fast", """, "principle", "."]
+
+========================================================================
+
+
+
+POST 73
+
+If you choose to throw a NPE and you are using the argument in your method, it might be redundant and expensive to explicitly check for a null. I think the VM already does that for you.
+
+------------------------------------------------------------------------
+
+["If", "you", "choose", "to", "throw", "a", "NPE", "and", "you", "are", "using", "the", "argument", "in", "your", "method", ",", "it", "might", "be", "redundant", "and", "expensive", "to", "explicitly", "check", "for", "a", "null", ".", "I", "think", "the", "VM", "already", "does", "that", "for", "you", "."]
+
+========================================================================
+
+
+
+POST 74
+
+The accepted practice if to use the IllegalArgumentException( String message ) to declare a parameter to be invalid and give as much detail as possible... So to say that a parameters was found to be null while exception non-null, you would do something like this:
+
+You have virtually no reason to implicitly use the "NullPointerException". The NullPointerException is an exception thrown by the Java Virtual Machine when you try to execute code on null reference (Like toString()).
+
+------------------------------------------------------------------------
+
+["The", "accepted", "practice", "if", "to", "use", "the", "IllegalArgumentException", "(", "String", "message", ")", "to", "declare", "a", "parameter", "to", "be", "invalid", "and", "give", "as", "much", "detail", "as", "possible", "...", "So", "to", "say", "that", "a", "parameters", "was", "found", "to", "be", "null", "while", "exception", "non", "-", "null", ",", "you", "would", "do", "something", "like", "this", ":", "You", "have", "virtually", "no", "reason", "to", "implicitly", "use", "the", """, "NullPointerException", """, ".", "The", "NullPointerException", "is", "an", "exception", "thrown", "by", "the", "Java", "Virtual", "Machine", "when", "you", "try", "to", "execute", "code", "on", "null", "reference", "(", "Like", "toString", "(", ")", ")", "."]
+
+========================================================================
+
+
+
+POST 75
+
+The standard is to throw the NullPointerException. The generally infallible "Effective Java" discusses this briefly in Item 42 (in the first edition) or Item 60 (in the second edition) "Favor the use of standard exceptions":
+
+  "Arguably, all erroneous method
+  invocations boil down to an illegal
+  argument or illegal state, but other
+  exceptions are standardly used for
+  certain kinds of illegal arguments and
+  states. If a caller passes null in
+  some parameter for which null values
+  are prohibited, convention dictates
+  that NullPointerException be thrown
+  rather than IllegalArgumentException."
+
+------------------------------------------------------------------------
+
+["The", "standard", "is", "to", "throw", "the", "NullPointerException", ".", "The", "generally", "infallible", """, "Effective", "Java", """, "discusses", "this", "briefly", "in", "Item", "42", "(", "in", "the", "first", "edition", ")", "or", "Item", "60", "(", "in", "the", "second", "edition", ")", """, "Favor", "the", "use", "of", "standard", "exceptions", """, ":", """, "Arguably", ",", "all", "erroneous", "method", "invocations", "boil", "down", "to", "an", "illegal", "argument", "or", "illegal", "state", ",", "but", "other", "exceptions", "are", "standardly", "used", "for", "certain", "kinds", "of", "illegal", "arguments", "and", "states", ".", "If", "a", "caller", "passes", "null", "in", "some", "parameter", "for", "which", "null", "values", "are", "prohibited", ",", "convention", "dictates", "that", "NullPointerException", "be", "thrown", "rather", "than", "IllegalArgumentException", ".", """]
+
+========================================================================
+
+
+
+POST 76
+
+The definitions from the links to the two exceptions above are
+IllegalArgumentException: Thrown to indicate that a method has been passed an illegal or inappropriate argument. 
+NullPointerException: Thrown when an application attempts to use null in a case where an object is required.
+
+The big difference here is the IllegalArgumentException is supposed to be used when checking that an argument to a method is valid. NullPointerException is supposed to be used whenever an object being "used" when it is null.
+
+I hope that helps put the two in perspective.
+
+------------------------------------------------------------------------
+
+["The", "definitions", "from", "the", "links", "to", "the", "two", "exceptions", "above", "are", "IllegalArgumentException", ":", "Thrown", "to", "indicate", "that", "a", "method", "has", "been", "passed", "an", "illegal", "or", "inappropriate", "argument", ".", "NullPointerException", ":", "Thrown", "when", "an", "application", "attempts", "to", "use", "null", "in", "a", "case", "where", "an", "object", "is", "required", ".", "The", "big", "difference", "here", "is", "the", "IllegalArgumentException", "is", "supposed", "to", "be", "used", "when", "checking", "that", "an", "argument", "to", "a", "method", "is", "valid", ".", "NullPointerException", "is", "supposed", "to", "be", "used", "whenever", "an", "object", "being", """, "used", """, "when", "it", "is", "null", ".", "I", "hope", "that", "helps", "put", "the", "two", "in", "perspective", "."]
+
+========================================================================
+
+
+
+POST 77
+
+Couldn't agree more with what's being said.  Fail early, fail fast.  Pretty good Exception mantra. 
+
+The question about which Exception to throw is mostly a matter of personal taste.  In my mind IllegalArgumentException seems more specific than using a NPE since it's telling me that the problem was with an argument I passed to the method and not with a value that may have been generated while performing the method.
+
+My 2 Cents
+
+------------------------------------------------------------------------
+
+["Could", "n't", "agree", "more", "with", "what", "'s", "being", "said", ".", "Fail", "early", ",", "fail", "fast", ".", "Pretty", "good", "Exception", "mantra", ".", "The", "question", "about", "which", "Exception", "to", "throw", "is", "mostly", "a", "matter", "of", "personal", "taste", ".", "In", "my", "mind", "IllegalArgumentException", "seems", "more", "specific", "than", "using", "a", "NPE", "since", "it", "'s", "telling", "me", "that", "the", "problem", "was", "with", "an", "argument", "I", "passed", "to", "the", "method", "and", "not", "with", "a", "value", "that", "may", "have", "been", "generated", "while", "performing", "the", "method", ".", "My", "2", "Cents"]
+
+========================================================================
+
+
+
+POST 78
+
+If it's a "setter", or somewhere I'm getting a member to use later, I tend to use IllegalArgumentException.
+
+If it's something I'm going to use (dereference) right now in the method, I throw a NullPointerException proactively. I like this better than letting the runtime do it, because I can provide a helpful message (seems like the runtime could do this too, but that's a rant for another day).
+
+If I'm overriding a method, I use whatever the overridden method uses.
+
+------------------------------------------------------------------------
+
+["If", "it", "'s", "a", """, "setter", """, ",", "or", "somewhere", "I", "'m", "getting", "a", "member", "to", "use", "later", ",", "I", "tend", "to", "use", "IllegalArgumentException", ".", "If", "it", "'s", "something", "I", "'m", "going", "to", "use", "(", "dereference", ")", "right", "now", "in", "the", "method", ",", "I", "throw", "a", "NullPointerException", "proactively", ".", "I", "like", "this", "better", "than", "letting", "the", "runtime", "do", "it", ",", "because", "I", "can", "provide", "a", "helpful", "message", "(", "seems", "like", "the", "runtime", "could", "do", "this", "too", ",", "but", "that", "'s", "a", "rant", "for", "another", "day", ")", ".", "If", "I", "'m", "overriding", "a", "method", ",", "I", "use", "whatever", "the", "overridden", "method", "uses", "."]
+
+========================================================================
+
+
+
+POST 79
+
+In general, a developer should never throw a NullPointerException. This exception is thrown by the runtime when code attempts to dereference a variable who's value is null. Therefore, if your method wants to explicitly disallow null, as opposed to just happening to have a null value raise a NullPointerException, you should throw an IllegalArgumentException.
+
+------------------------------------------------------------------------
+
+["In", "general", ",", "a", "developer", "should", "never", "throw", "a", "NullPointerException", ".", "This", "exception", "is", "thrown", "by", "the", "runtime", "when", "code", "attempts", "to", "dereference", "a", "variable", "who", "'s", "value", "is", "null", ".", "Therefore", ",", "if", "your", "method", "wants", "to", "explicitly", "disallow", "null", ",", "as", "opposed", "to", "just", "happening", "to", "have", "a", "null", "value", "raise", "a", "NullPointerException", ",", "you", "should", "throw", "an", "IllegalArgumentException", "."]
+
+========================================================================
+
+
+
+POST 80
+
+You should be using <code>IllegalArgumentException</code> (IAE), not <code>NullPointerException</code> (NPE) for the following reasons:
+
+First, the NPE JavaDoc explicitly lists the cases where NPE is appropriate.  Notice that all of them are thrown by the runtime when <code>null</code> is used inappropriately.  In contrast, the IAE JavaDoc couldn't be more clear: "Thrown to indicate that a method has been passed an illegal or inappropriate argument."  Yup, that's you!
+
+Second, when you see an NPE in a stack trace, what do you assume?  Probably that someone dereferenced a <code>null</code>.  When you see IAE, you assume the caller of the method at the top of the stack passed in an illegal value.  Again, the latter assumption is true, the former is misleading.
+
+Third, since IAE is clearly designed for validating parameters, you have to assume it as the default choice of exception, so why would you choose NPE instead?  Certainly not for different behavior -- do you really expect calling code to catch NPE's separately from IAE and do something different as a result?  Are you trying to communicate a more specific error message?  But you can do that in the exception message text anyway, as you should for all other incorrect parameters.
+
+Fourth, all other incorrect parameter data will be IAE, so why not be consistent?  Why is it that an illegal <code>null</code> is so special that it deserves a separate exception from all other types of illegal arguments?
+
+Finally, I accept the argument given by other answers that parts of the Java API use NPE in this manner.  However, the Java API is inconsistent with everything from exception types to naming conventions, so I think just blindly copying (your favorite part of) the Java API isn't a good enough argument to trump these other considerations.
+
+------------------------------------------------------------------------
+
+["You", "should", "be", "using", "<code>IllegalArgumentException</code>", "(", "IAE", ")", ",", "not", "<code>NullPointerException</code>", "(", "NPE", ")", "for", "the", "following", "reasons", ":", "First", ",", "the", "NPE", "JavaDoc", "explicitly", "lists", "the", "cases", "where", "NPE", "is", "appropriate", ".", "Notice", "that", "all", "of", "them", "are", "thrown", "by", "the", "runtime", "when", "<code>null</code>", "is", "used", "inappropriately", ".", "In", "contrast", ",", "the", "IAE", "JavaDoc", "could", "n't", "be", "more", "clear", ":", """, "Thrown", "to", "indicate", "that", "a", "method", "has", "been", "passed", "an", "illegal", "or", "inappropriate", "argument", ".", """, "Yup", ",", "that", "'s", "you", "!", "Second", ",", "when", "you", "see", "an", "NPE", "in", "a", "stack", "trace", ",", "what", "do", "you", "assume", "?", "Probably", "that", "someone", "dereferenced", "a", "<code>null</code>", ".", "When", "you", "see", "IAE", ",", "you", "assume", "the", "caller", "of", "the", "method", "at", "the", "top", "of", "the", "stack", "passed", "in", "an", "illegal", "value", ".", "Again", ",", "the", "latter", "assumption", "is", "true", ",", "the", "former", "is", "misleading", ".", "Third", ",", "since", "IAE", "is", "clearly", "designed", "for", "validating", "parameters", ",", "you", "have", "to", "assume", "it", "as", "the", "default", "choice", "of", "exception", ",", "so", "why", "would", "you", "choose", "NPE", "instead", "?", "Certainly", "not", "for", "different", "behavior", "-", "-", "do", "you", "really", "expect", "calling", "code", "to", "catch", "NPE", "'s", "separately", "from", "IAE", "and", "do", "something", "different", "as", "a", "result", "?", "Are", "you", "trying", "to", "communicate", "a", "more", "specific", "error", "message", "?", "But", "you", "can", "do", "that", "in", "the", "exception", "message", "text", "anyway", ",", "as", "you", "should", "for", "all", "other", "incorrect", "parameters", ".", "Fourth", ",", "all", "other", "incorrect", "parameter", "data", "will", "be", "IAE", ",", "so", "why", "not", "be", "consistent", "?", "Why", "is", "it", "that", "an", "illegal", "<code>null</code>", "is", "so", "special", "that", "it", "deserves", "a", "separate", "exception", "from", "all", "other", "types", "of", "illegal", "arguments", "?", "Finally", ",", "I", "accept", "the", "argument", "given", "by", "other", "answers", "that", "parts", "of", "the", "Java", "API", "use", "NPE", "in", "this", "manner", ".", "However", ",", "the", "Java", "API", "is", "inconsistent", "with", "everything", "from", "exception", "types", "to", "naming", "conventions", ",", "so", "I", "think", "just", "blindly", "copying", "(", "your", "favorite", "part", "of", ")", "the", "Java", "API", "is", "n't", "a", "good", "enough", "argument", "to", "trump", "these", "other", "considerations", "."]
+
+========================================================================
+
+
+
+POST 81
+
+You should throw an IllegalArgumentException, as it will make it obvious to the programmer that he has done something invalid.  Developers are so used to seeing NPE thrown by the VM, that any programmer would not immediately realize his error, and would start looking around randomly, or worse, blame your code for being 'buggy'.
+
+------------------------------------------------------------------------
+
+["You", "should", "throw", "an", "IllegalArgumentException", ",", "as", "it", "will", "make", "it", "obvious", "to", "the", "programmer", "that", "he", "has", "done", "something", "invalid", ".", "Developers", "are", "so", "used", "to", "seeing", "NPE", "thrown", "by", "the", "VM", ",", "that", "any", "programmer", "would", "not", "immediately", "realize", "his", "error", ",", "and", "would", "start", "looking", "around", "randomly", ",", "or", "worse", ",", "blame", "your", "code", "for", "being", "'", "buggy", "'", "."]
+
+========================================================================
+
+
+
+POST 82
+
+What code analysis tools do you use on your Java projects?
+
+I am interested in all kinds
+
+static code analysis tools (FindBugs, PMD, and any others)
+code coverage tools (Cobertura, Emma, and any others)
+any other instrumentation-based tools 
+anything else, if I'm missing something
+
+If applicable, also state what build tools you use and how well these tools integrate with both your IDEs and build tools. 
+
+If a tool is only available a specific way (as an IDE plugin, or, say, a build tool plugin) that information is also worth noting.
+
+------------------------------------------------------------------------
+
+["What", "code", "analysis", "tools", "do", "you", "use", "on", "your", "Java", "projects", "?", "I", "am", "interested", "in", "all", "kinds", "static", "code", "analysis", "tools", "(", "FindBugs", ",", "PMD", ",", "and", "any", "others", ")", "code", "coverage", "tools", "(", "Cobertura", ",", "Emma", ",", "and", "any", "others", ")", "any", "other", "instrumentation", "-", "based", "tools", "anything", "else", ",", "if", "I", "'m", "missing", "something", "If", "applicable", ",", "also", "state", "what", "build", "tools", "you", "use", "and", "how", "well", "these", "tools", "integrate", "with", "both", "your", "IDEs", "and", "build", "tools", ".", "If", "a", "tool", "is", "only", "available", "a", "specific", "way", "(", "as", "an", "IDE", "plugin", ",", "or", ",", "say", ",", "a", "build", "tool", "plugin", ")", "that", "information", "is", "also", "worth", "noting", "."]
+
+========================================================================
+
+
+
+POST 83
+
+We use FindBugs and JDepend integrated with Ant. We use JUnit but we're not using any coverage tool. 
+
+I'm not using it integrated to Rational Application Developer (the IDE I'm using to develop J2EE applications) because I like how neat it looks when you run javac in the Windows console. :P
+
+------------------------------------------------------------------------
+
+["We", "use", "FindBugs", "and", "JDepend", "integrated", "with", "Ant", ".", "We", "use", "JUnit", "but", "we", "'re", "not", "using", "any", "coverage", "tool", ".", "I", "'m", "not", "using", "it", "integrated", "to", "Rational", "Application", "Developer", "(", "the", "IDE", "I", "'m", "using", "to", "develop", "J2EE", "applications", ")", "because", "I", "like", "how", "neat", "it", "looks", "when", "you", "run", "javac", "in", "the", "Windows", "console", ".", ":P"]
+
+========================================================================
+
+
+
+POST 84
+
+Checkstyle is another one I've used at a previous company... it's mainly for style checking, but it can do some static analysis too.  Also, Clover for code coverage, though be aware it is not a free tool.
+
+------------------------------------------------------------------------
+
+["Checkstyle", "is", "another", "one", "I", "'ve", "used", "at", "a", "previous", "company", "...", "it", "'s", "mainly", "for", "style", "checking", ",", "but", "it", "can", "do", "some", "static", "analysis", "too", ".", "Also", ",", "Clover", "for", "code", "coverage", ",", "though", "be", "aware", "it", "is", "not", "a", "free", "tool", "."]
+
+========================================================================
+
+
+
+POST 85
+
+We are using FindBugs and Checkstyle as well as Clover for Code Coverage. 
+
+I think it's important to have some kind of static analysis, supporting your development. Unfortunately it's still not widely spread that these tools are important.
+
+------------------------------------------------------------------------
+
+["We", "are", "using", "FindBugs", "and", "Checkstyle", "as", "well", "as", "Clover", "for", "Code", "Coverage", ".", "I", "think", "it", "'s", "important", "to", "have", "some", "kind", "of", "static", "analysis", ",", "supporting", "your", "development", ".", "Unfortunately", "it", "'s", "still", "not", "widely", "spread", "that", "these", "tools", "are", "important", "."]
+
+========================================================================
+
+
+
+POST 86
+
+I am looking for many answers to learn about new tools and consolidate this knowledge in a one question/thread, so I doubt there will be 1 true answer to this question.
+
+My answer to my own question is that we use:
+
+Findbugs to look for common errors bad/coding - run from maven, and also integrates easily into Eclipse
+Cobertura for our coverage reports - run from maven
+
+Hudson also has a task-scanner plugin that will display a count of your TODO and FIXMEs, as well as show where they are in the source files.
+
+All are integrated with Maven 1.x in our case and tied into Hudson, which runs our builds on check-in as well as extra things nightly and weekly. Hudson trend graphs our JUnit tests, coverage, findbugs, as well as open tasks. There is also a Hudson plugin that reports and graphs our compile warnings. We also have several performance tests with their own graphs of performance and memory use over time using the Hudson plots plugin as well.
+
+------------------------------------------------------------------------
+
+["I", "am", "looking", "for", "many", "answers", "to", "learn", "about", "new", "tools", "and", "consolidate", "this", "knowledge", "in", "a", "one", "question", "/", "thread", ",", "so", "I", "doubt", "there", "will", "be", "1", "true", "answer", "to", "this", "question", ".", "My", "answer", "to", "my", "own", "question", "is", "that", "we", "use", ":", "Findbugs", "to", "look", "for", "common", "errors", "bad", "/", "coding", "-", "run", "from", "maven", ",", "and", "also", "integrates", "easily", "into", "Eclipse", "Cobertura", "for", "our", "coverage", "reports", "-", "run", "from", "maven", "Hudson", "also", "has", "a", "task", "-", "scanner", "plugin", "that", "will", "display", "a", "count", "of", "your", "TODO", "and", "FIXMEs", ",", "as", "well", "as", "show", "where", "they", "are", "in", "the", "source", "files", ".", "All", "are", "integrated", "with", "Maven", "1.x", "in", "our", "case", "and", "tied", "into", "Hudson", ",", "which", "runs", "our", "builds", "on", "check", "-", "in", "as", "well", "as", "extra", "things", "nightly", "and", "weekly", ".", "Hudson", "trend", "graphs", "our", "JUnit", "tests", ",", "coverage", ",", "findbugs", ",", "as", "well", "as", "open", "tasks", ".", "There", "is", "also", "a", "Hudson", "plugin", "that", "reports", "and", "graphs", "our", "compile", "warnings", ".", "We", "also", "have", "several", "performance", "tests", "with", "their", "own", "graphs", "of", "performance", "and", "memory", "use", "over", "time", "using", "the", "Hudson", "plots", "plugin", "as", "well", "."]
+
+========================================================================
+
+
+
+POST 87
+
+All of the following we use and integrate easiy in both our Maven 2.x builds and Eclipse/RAD 7:
+
+Testing - JUnit/TestNG
+Code analysis - FindBugs, PMD
+Code coverage - Clover
+
+In addition, in our Maven builds we have:
+
+JDepend
+Tag checker (TODO, FIXME, etc)
+
+Furthermore, if you're using Maven 2.x, CodeHaus has a collection of handy Maven plugins in their Mojo project.
+
+Note: Clover has out-of-the-box integration with the Bamboo CI server (since they're both Atlassian products). There are also Bamboo plugins for FindBugs, PMD, and CheckStyle but, as noted, the free Hudson CI server has those too.
+
+------------------------------------------------------------------------
+
+["All", "of", "the", "following", "we", "use", "and", "integrate", "easiy", "in", "both", "our", "Maven", "2.x", "builds", "and", "Eclipse", "/", "RAD", "7", ":", "Testing", "-", "JUnit", "/", "TestNG", "Code", "analysis", "-", "FindBugs", ",", "PMD", "Code", "coverage", "-", "Clover", "In", "addition", ",", "in", "our", "Maven", "builds", "we", "have", ":", "JDepend", "Tag", "checker", "(", "TODO", ",", "FIXME", ",", "etc", ")", "Furthermore", ",", "if", "you", "'re", "using", "Maven", "2.x", ",", "CodeHaus", "has", "a", "collection", "of", "handy", "Maven", "plugins", "in", "their", "Mojo", "project", ".", "Note", ":", "Clover", "has", "out", "-", "of", "-", "the", "-", "box", "integration", "with", "the", "Bamboo", "CI", "server", "(", "since", "they", "'re", "both", "Atlassian", "products", ")", ".", "There", "are", "also", "Bamboo", "plugins", "for", "FindBugs", ",", "PMD", ",", "and", "CheckStyle", "but", ",", "as", "noted", ",", "the", "free", "Hudson", "CI", "server", "has", "those", "too", "."]
+
+========================================================================
+
+
+
+POST 88
+
+I have an application that writes information to file. This information is used post-execution to determine pass/failure/correctness of the application. I'd like to be able to read the file as it is being written so that I can do these pass/failure/correctness checks in realtime.
+
+I assume it is possible to do this, but what are the gotchas involved when using Java? If the reading catches up to the writing, will it just wait for more writes up until the file is closed, or will the read throw an exception at this point? If the latter, what do I do then? 
+
+My intuition is currently pushing me towards BufferedStreams. Is this the way to go?
+
+------------------------------------------------------------------------
+
+["I", "have", "an", "application", "that", "writes", "information", "to", "file", ".", "This", "information", "is", "used", "post", "-", "execution", "to", "determine", "pass", "/", "failure", "/", "correctness", "of", "the", "application", ".", "I", "'d", "like", "to", "be", "able", "to", "read", "the", "file", "as", "it", "is", "being", "written", "so", "that", "I", "can", "do", "these", "pass", "/", "failure", "/", "correctness", "checks", "in", "realtime", ".", "I", "assume", "it", "is", "possible", "to", "do", "this", ",", "but", "what", "are", "the", "gotchas", "involved", "when", "using", "Java", "?", "If", "the", "reading", "catches", "up", "to", "the", "writing", ",", "will", "it", "just", "wait", "for", "more", "writes", "up", "until", "the", "file", "is", "closed", ",", "or", "will", "the", "read", "throw", "an", "exception", "at", "this", "point", "?", "If", "the", "latter", ",", "what", "do", "I", "do", "then", "?", "My", "intuition", "is", "currently", "pushing", "me", "towards", "BufferedStreams", ".", "Is", "this", "the", "way", "to", "go", "?"]
+
+========================================================================
+
+
+
+POST 89
+
+Not Java per-se, but you may run into issues where you have written something to a file, but it hasn't been actually written yet - it might be in a cache somewhere, and reading from the same file may not actually give you the new information.
+
+Short version - use flush() or whatever the relevant system call is to ensure that your data is actually written to the file.
+
+Note I am not talking about the OS level disk cache - if your data gets into here, it should appear in a read() after this point.  It may be that the language itself caches writes, waiting until a buffer fills up or file is flushed/closed.
+
+------------------------------------------------------------------------
+
+["Not", "Java", "per", "-", "se", ",", "but", "you", "may", "run", "into", "issues", "where", "you", "have", "written", "something", "to", "a", "file", ",", "but", "it", "has", "n't", "been", "actually", "written", "yet", "-", "it", "might", "be", "in", "a", "cache", "somewhere", ",", "and", "reading", "from", "the", "same", "file", "may", "not", "actually", "give", "you", "the", "new", "information", ".", "Short", "version", "-", "use", "flush", "(", ")", "or", "whatever", "the", "relevant", "system", "call", "is", "to", "ensure", "that", "your", "data", "is", "actually", "written", "to", "the", "file", ".", "Note", "I", "am", "not", "talking", "about", "the", "OS", "level", "disk", "cache", "-", "if", "your", "data", "gets", "into", "here", ",", "it", "should", "appear", "in", "a", "read", "(", ")", "after", "this", "point", ".", "It", "may", "be", "that", "the", "language", "itself", "caches", "writes", ",", "waiting", "until", "a", "buffer", "fills", "up", "or", "file", "is", "flushed", "/", "closed", "."]
+
+========================================================================
+
+
+
+POST 90
+
+I've never tried it, but you should write a test case to see if reading from a stream after you have hit the end will work, regardless of if there is more data written to the file.
+
+Is there a reason you can't use a piped input/output stream?  Is the data being written and read from the same application (if so, you have the data, why do you need to read from the file)?
+
+Otherwise, maybe read till end of file, then monitor for changes and seek to where you left off and continue... though watch out for race conditions.
+
+------------------------------------------------------------------------
+
+["I", "'ve", "never", "tried", "it", ",", "but", "you", "should", "write", "a", "test", "case", "to", "see", "if", "reading", "from", "a", "stream", "after", "you", "have", "hit", "the", "end", "will", "work", ",", "regardless", "of", "if", "there", "is", "more", "data", "written", "to", "the", "file", ".", "Is", "there", "a", "reason", "you", "ca", "n't", "use", "a", "piped", "input", "/", "output", "stream", "?", "Is", "the", "data", "being", "written", "and", "read", "from", "the", "same", "application", "(", "if", "so", ",", "you", "have", "the", "data", ",", "why", "do", "you", "need", "to", "read", "from", "the", "file", ")", "?", "Otherwise", ",", "maybe", "read", "till", "end", "of", "file", ",", "then", "monitor", "for", "changes", "and", "seek", "to", "where", "you", "left", "off", "and", "continue", "...", "though", "watch", "out", "for", "race", "conditions", "."]
+
+========================================================================
+
+
+
+POST 91
+
+The answer seems to be "no" ... and "yes". There seems to be no real way to know if a file is open for writing by another application. So, reading from such a file will just progress until content is exhausted. I took Mike's advice and wrote some test code:
+
+Writer.java writes a string to file and then waits for the user to hit enter before writing another line to file. The idea being that it could be started up, then a reader can be started to see how it copes with the "partial" file. The reader I wrote is in Reader.java.
+
+Writer.java
+
+No guarantees that this code is best practice.
+
+This leaves the option suggested by Mike of periodically checking if there is new data to be read from the file. This then requires user intervention to close the file reader when it is determined that the reading is completed. Or, the reader needs to be made aware the content of the file and be able to determine and end of write condition. If the content were XML, the end of document could be used to signal this.
+
+------------------------------------------------------------------------
+
+["The", "answer", "seems", "to", "be", """, "no", """, "...", "and", """, "yes", """, ".", "There", "seems", "to", "be", "no", "real", "way", "to", "know", "if", "a", "file", "is", "open", "for", "writing", "by", "another", "application", ".", "So", ",", "reading", "from", "such", "a", "file", "will", "just", "progress", "until", "content", "is", "exhausted", ".", "I", "took", "Mike", "'s", "advice", "and", "wrote", "some", "test", "code", ":", "Writer.java", "writes", "a", "string", "to", "file", "and", "then", "waits", "for", "the", "user", "to", "hit", "enter", "before", "writing", "another", "line", "to", "file", ".", "The", "idea", "being", "that", "it", "could", "be", "started", "up", ",", "then", "a", "reader", "can", "be", "started", "to", "see", "how", "it", "copes", "with", "the", """, "partial", """, "file", ".", "The", "reader", "I", "wrote", "is", "in", "Reader.java", ".", "Writer.java", "No", "guarantees", "that", "this", "code", "is", "best", "practice", ".", "This", "leaves", "the", "option", "suggested", "by", "Mike", "of", "periodically", "checking", "if", "there", "is", "new", "data", "to", "be", "read", "from", "the", "file", ".", "This", "then", "requires", "user", "intervention", "to", "close", "the", "file", "reader", "when", "it", "is", "determined", "that", "the", "reading", "is", "completed", ".", "Or", ",", "the", "reader", "needs", "to", "be", "made", "aware", "the", "content", "of", "the", "file", "and", "be", "able", "to", "determine", "and", "end", "of", "write", "condition", ".", "If", "the", "content", "were", "XML", ",", "the", "end", "of", "document", "could", "be", "used", "to", "signal", "this", "."]
+
+========================================================================
+
+
+
+POST 92
+
+You might also take a look at java channel for locking a part of a file.
+
+http://java.sun.com/javase/6/docs/api/java/nio/channels/FileChannel.html
+
+This function of the <code>FileChannel</code> might be a start
+
+An invocation of this method will block until the region can be locked
+
+------------------------------------------------------------------------
+
+["You", "might", "also", "take", "a", "look", "at", "java", "channel", "for", "locking", "a", "part", "of", "a", "file", ".", "http://java.sun.com/javase/6/docs/api/java/nio/channels/FileChannel.html", "This", "function", "of", "the", "<code>FileChannel</code>", "might", "be", "a", "start", "An", "invocation", "of", "this", "method", "will", "block", "until", "the", "region", "can", "be", "locked"]
+
+========================================================================
+
+
+
+POST 93
+
+I want to convert a primitive to a string, and I tried:
+
+Now, I get that primitives are not reference types (ie, not an Object) and so cannot have methods.  However, Java 5 introduced autoboxing and unboxing (a la C#... which I never liked in C#, but that's beside the point).  So with autoboxing, I would expect the above to convert myInt to an Integer and then call toString() on that.
+
+Furthermore, I believe C# allows such a call, unless I remember incorrectly.  Is this just an unfortunate shortcoming of Java's autoboxing/unboxing specification, or is there a good reason for this?
+
+------------------------------------------------------------------------
+
+["I", "want", "to", "convert", "a", "primitive", "to", "a", "string", ",", "and", "I", "tried", ":", "Now", ",", "I", "get", "that", "primitives", "are", "not", "reference", "types", "(", "ie", ",", "not", "an", "Object", ")", "and", "so", "cannot", "have", "methods", ".", "However", ",", "Java", "5", "introduced", "autoboxing", "and", "unboxing", "(", "a", "la", "C#", "...", "which", "I", "never", "liked", "in", "C#", ",", "but", "that", "'s", "beside", "the", "point", ")", ".", "So", "with", "autoboxing", ",", "I", "would", "expect", "the", "above", "to", "convert", "myInt", "to", "an", "Integer", "and", "then", "call", "toString", "(", ")", "on", "that", ".", "Furthermore", ",", "I", "believe", "C#", "allows", "such", "a", "call", ",", "unless", "I", "remember", "incorrectly", ".", "Is", "this", "just", "an", "unfortunate", "shortcoming", "of", "Java", "'s", "autoboxing", "/", "unboxing", "specification", ",", "or", "is", "there", "a", "good", "reason", "for", "this", "?"]
+
+========================================================================
+
+
+
+POST 94
+
+Java autoboxing/unboxing doesn't go to the extent to allow you to dereference a primitive, so your compiler prevents it. Your compiler still knows <code>myInt</code> as a primitive.  There's a paper about this issue at jcp.org.
+
+Autoboxing is mainly useful during assignment or parameter passing -- allowing you to pass a primitive as an object (or vice versa), or assign a primitive to an object (or vice versa).
+
+So unfortunately, you would have to do it like this: (kudos Patrick, I switched to your way)
+
+------------------------------------------------------------------------
+
+["Java", "autoboxing", "/", "unboxing", "does", "n't", "go", "to", "the", "extent", "to", "allow", "you", "to", "dereference", "a", "primitive", ",", "so", "your", "compiler", "prevents", "it", ".", "Your", "compiler", "still", "knows", "<code>myInt</code>", "as", "a", "primitive", ".", "There", "'s", "a", "paper", "about", "this", "issue", "at", "jcp.org", ".", "Autoboxing", "is", "mainly", "useful", "during", "assignment", "or", "parameter", "passing", "-", "-", "allowing", "you", "to", "pass", "a", "primitive", "as", "an", "object", "(", "or", "vice", "versa", ")", ",", "or", "assign", "a", "primitive", "to", "an", "object", "(", "or", "vice", "versa", ")", ".", "So", "unfortunately", ",", "you", "would", "have", "to", "do", "it", "like", "this", ":", "(", "kudos", "Patrick", ",", "I", "switched", "to", "your", "way", ")"]
+
+========================================================================
+
+
+
+POST 95
+
+Ditto on what Justin said, but you should do this instead:
+
+It saves an allocation or two and is more readable.
+
+------------------------------------------------------------------------
+
+["Ditto", "on", "what", "Justin", "said", ",", "but", "you", "should", "do", "this", "instead", ":", "It", "saves", "an", "allocation", "or", "two", "and", "is", "more", "readable", "."]
+
+========================================================================
+
+
+
+POST 96
+
+seems like a shortcoming of the
+  specification to me
+
+There are more shortcomings and this is a subtle topic. Check this out:
+
+Here "long" would be printed (haven't checked it myself), because the compiler choses widening over autoboxing. Be careful when using autoboxing or don't use it at all!
+
+------------------------------------------------------------------------
+
+["seems", "like", "a", "shortcoming", "of", "the", "specification", "to", "me", "There", "are", "more", "shortcomings", "and", "this", "is", "a", "subtle", "topic", ".", "Check", "this", "out", ":", "Here", """, "long", """, "would", "be", "printed", "(", "have", "n't", "checked", "it", "myself", ")", ",", "because", "the", "compiler", "choses", "widening", "over", "autoboxing", ".", "Be", "careful", "when", "using", "autoboxing", "or", "do", "n't", "use", "it", "at", "all", "!"]
+
+========================================================================
+
+
+
+POST 97
+
+One other way to do it is to use:
+
+This method is overloaded for every primitive type and <code>Object</code>. This way you don't even have to think about the type you're using. Implementations of the method will call the appropriate method of the given type for you, e.g. <code>Integer.toString(myInt)</code>.
+
+See http://java.sun.com/javase/6/docs/api/java/lang/String.html.
+
+------------------------------------------------------------------------
+
+["One", "other", "way", "to", "do", "it", "is", "to", "use", ":", "This", "method", "is", "overloaded", "for", "every", "primitive", "type", "and", "<code>Object</code>", ".", "This", "way", "you", "do", "n't", "even", "have", "to", "think", "about", "the", "type", "you", "'re", "using", ".", "Implementations", "of", "the", "method", "will", "call", "the", "appropriate", "method", "of", "the", "given", "type", "for", "you", ",", "e.g.", "<code>Integer.toString(myInt)</code>", ".", "See", "http://java.sun.com/javase/6/docs/api/java/lang/String.html", "."]
+
+========================================================================
+
+
+
+POST 98
+
+In C#, integers are neither reference types nor do they have to be boxed in order for ToString() to be called. They are considered objects in the Framework (as a ValueType, so they have value semantics), however. In the CLR, methods on primitives are called by "indirectly" loading them onto the stack (ldind).
+
+------------------------------------------------------------------------
+
+["In", "C#", ",", "integers", "are", "neither", "reference", "types", "nor", "do", "they", "have", "to", "be", "boxed", "in", "order", "for", "ToString", "(", ")", "to", "be", "called", ".", "They", "are", "considered", "objects", "in", "the", "Framework", "(", "as", "a", "ValueType", ",", "so", "they", "have", "value", "semantics", ")", ",", "however", ".", "In", "the", "CLR", ",", "methods", "on", "primitives", "are", "called", "by", """, "indirectly", """, "loading", "them", "onto", "the", "stack", "(", "ldind", ")", "."]
+
+========================================================================
+
+
+
+POST 99
+
+Example: I have two shared objects (same should apply to .dlls). The first shared object is from a third-party library, we'll call it libA.so. I have wrapped some of this with JNI and created my own library, libB.so. Now libB depends on libA.
+
+When webstarting, both libraries are places in some webstart working area. My java code attempts to load libB. At this point the system loader will attempt to load libA which is not in the system library path (java.library.path won't help this). The end result is that libB has an unsatisfied link and cannot be used. 
+
+I have tried loading libA before libB, but that still does not work. Seems the OS wants to do that loading for me. Is there any way I can make this work other than statically  compiling?
+
+------------------------------------------------------------------------
+
+["Example", ":", "I", "have", "two", "shared", "objects", "(", "same", "should", "apply", "to", ".dlls", ")", ".", "The", "first", "shared", "object", "is", "from", "a", "third", "-", "party", "library", ",", "we", "'ll", "call", "it", "libA.so", ".", "I", "have", "wrapped", "some", "of", "this", "with", "JNI", "and", "created", "my", "own", "library", ",", "libB.so", ".", "Now", "libB", "depends", "on", "libA", ".", "When", "webstarting", ",", "both", "libraries", "are", "places", "in", "some", "webstart", "working", "area", ".", "My", "java", "code", "attempts", "to", "load", "libB", ".", "At", "this", "point", "the", "system", "loader", "will", "attempt", "to", "load", "libA", "which", "is", "not", "in", "the", "system", "library", "path", "(", "java.library.path", "wo", "n't", "help", "this", ")", ".", "The", "end", "result", "is", "that", "libB", "has", "an", "unsatisfied", "link", "and", "cannot", "be", "used", ".", "I", "have", "tried", "loading", "libA", "before", "libB", ",", "but", "that", "still", "does", "not", "work", ".", "Seems", "the", "OS", "wants", "to", "do", "that", "loading", "for", "me", ".", "Is", "there", "any", "way", "I", "can", "make", "this", "work", "other", "than", "statically", "compiling", "?"]
+
+========================================================================
+
+
+
+POST 100
+
+I'm not sure if this would be handled exactly the same way for webstart, but we ran into this situation in a desktop application when dealing with a set of native libraries (dlls in our case).
+
+Loading libA before libB should work, unless one of those libraries has a dependency that is unaccounted for and not in the path. My understanding is that once it gets to a system loadLibrary call (i.e. Java has found the library in its java.library.path and is now telling the OS to load it) - it is completely dependent on the operating system to find any dependent libraries, because at that point it is the operating system that is loading the library for the process, and the OS only knows how to look in the system path. That seems hard to set in the case of a Webstart app, but there is a way around this that does not involve static compiling. You may be able to shuffle where your libraries are - I am unsure 
+
+If you use a custom classloader, you can override loadLibrary and findLibrary so that it can locate your libraries from within a jar in your classpath, and if you also make it aware of your native library dependencies (i.e. libB depends on libA depends on libX, then when loading libB you can catch yourself and ensure you load libA first, and in checking that notice and load libX first. Then the OS doesn't try to find a library that isn't in your path. It's klunky and a bit painful, but ensuring Java finds them and loads them all in the correct order can work.
+
+------------------------------------------------------------------------
+
+["I", "'m", "not", "sure", "if", "this", "would", "be", "handled", "exactly", "the", "same", "way", "for", "webstart", ",", "but", "we", "ran", "into", "this", "situation", "in", "a", "desktop", "application", "when", "dealing", "with", "a", "set", "of", "native", "libraries", "(", "dlls", "in", "our", "case", ")", ".", "Loading", "libA", "before", "libB", "should", "work", ",", "unless", "one", "of", "those", "libraries", "has", "a", "dependency", "that", "is", "unaccounted", "for", "and", "not", "in", "the", "path", ".", "My", "understanding", "is", "that", "once", "it", "gets", "to", "a", "system", "loadLibrary", "call", "(", "i.e.", "Java", "has", "found", "the", "library", "in", "its", "java.library.path", "and", "is", "now", "telling", "the", "OS", "to", "load", "it", ")", "-", "it", "is", "completely", "dependent", "on", "the", "operating", "system", "to", "find", "any", "dependent", "libraries", ",", "because", "at", "that", "point", "it", "is", "the", "operating", "system", "that", "is", "loading", "the", "library", "for", "the", "process", ",", "and", "the", "OS", "only", "knows", "how", "to", "look", "in", "the", "system", "path", ".", "That", "seems", "hard", "to", "set", "in", "the", "case", "of", "a", "Webstart", "app", ",", "but", "there", "is", "a", "way", "around", "this", "that", "does", "not", "involve", "static", "compiling", ".", "You", "may", "be", "able", "to", "shuffle", "where", "your", "libraries", "are", "-", "I", "am", "unsure", "If", "you", "use", "a", "custom", "classloader", ",", "you", "can", "override", "loadLibrary", "and", "findLibrary", "so", "that", "it", "can", "locate", "your", "libraries", "from", "within", "a", "jar", "in", "your", "classpath", ",", "and", "if", "you", "also", "make", "it", "aware", "of", "your", "native", "library", "dependencies", "(", "i.e.", "libB", "depends", "on", "libA", "depends", "on", "libX", ",", "then", "when", "loading", "libB", "you", "can", "catch", "yourself", "and", "ensure", "you", "load", "libA", "first", ",", "and", "in", "checking", "that", "notice", "and", "load", "libX", "first", ".", "Then", "the", "OS", "does", "n't", "try", "to", "find", "a", "library", "that", "is", "n't", "in", "your", "path", ".", "It", "'s", "klunky", "and", "a", "bit", "painful", ",", "but", "ensuring", "Java", "finds", "them", "and", "loads", "them", "all", "in", "the", "correct", "order", "can", "work", "."]
+
+========================================================================

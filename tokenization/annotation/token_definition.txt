@@ -1,0 +1,17 @@
+Token Definition:
+=======================
+
+- Each non-alphanumeric character is a separate token, except in the cases listed below where they are considered part of a larger token:
+    - Ellipsis ('...'), Arrow ('->')
+    - Clitics ("'ll", "'ve", etc.)
+    - Text Emojis (';)', ':P', etc.)
+    - Programming Languages ('C#', 'C++', '.NET', etc.)
+    - Abbreviations ('e.g.', 'i.e.', 'etc.', etc.)
+    - Decimal Numbers
+    - URLs ('java.net', 'http://asm.objectweb.org/', etc.)
+    - Package Names ('com.foo.bar.class', etc.)
+    - File Paths ('com/foo/Bar.java', etc.)
+- An inline code block is a single separate token (from '<code>' to '</code>').
+- A numerical value is a separate token.
+- Clitics are separate tokens from the adjoining word.
+- A 'word' (defined by a chain of strictly alphabetical characters) is a separate token.
